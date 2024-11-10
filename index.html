@@ -52,7 +52,13 @@
     <h1>Hello, World!</h1>
     <p>This is my first custom website.</p>
     <script>
-        // Function to display the initial pop-up
+        // Show the modal and the initial pop-up when the page loads
+        window.onload = function() {
+            document.getElementById("modal").style.display = "flex";
+            showPopup();
+        };
+    
+        // Function to display the initial pop-up (just in case you want it separate)
         function showPopup() {
             // Ask the user a question
             let response = confirm("Do you want to stay on this awesome site?");
@@ -75,15 +81,6 @@
             }
         }
     
-        // Show the initial pop-up when the page loads
-        window.onload = showPopup;
-    </script>
-    <script>
-        // Show the modal when the page loads
-        window.onload = function() {
-            document.getElementById("modal").style.display = "flex";
-        };
-    
         // Function to close the modal if the user clicks "Yes"
         function closeModal() {
             document.getElementById("modal").style.display = "none";
@@ -95,6 +92,7 @@
             alert("Are you sure you want to leave? There's so much to see here!");
         }
     </script>
+    
       
 </body>
 </html>
