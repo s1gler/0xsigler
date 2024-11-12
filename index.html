@@ -3,96 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Webpage</title>
-    <style>
-        /* Modal background */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
-            justify-content: center;
-            align-items: center;
-        }
-    
-        /* Modal content box */
-        .modal-content {
-            background-image: url('doge1.jpg'); /* Set the background image */
-            background-size: cover; /* Cover the entire modal content */
-            background-position: center; /* Center the image */
-            color: white; /* Text color to contrast with the background image */
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px;
-            width: 300px;
-        }
-    
-        /* Button styles */
-        .modal-content button {
-            margin: 10px;
-            padding: 8px 16px;
-            cursor: pointer;
-        }
-    </style>
-    
-    
+    <title>Your Modern Website</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you want to stay on this awesome site?</h2>
-            <button onclick="closeModal()">Yes</button>
-            <button onclick="showAnnoyingPopup()">No</button>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/3178_transparent.png" alt="Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Stuff</a></li>
+                <!-- Update the "Nope" button to trigger JavaScript function -->
+                <li><a href="javascript:void(0);" onclick="openRandomWindows()">Nope</a></li>
+            </ul>
+            <div class="menu-toggle">☰</div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>SIGLER</h1>
+            <p></p>
+            <a href="#about" class="cta-button">!vibe?</a>
         </div>
-    </div>
-    
-    <h1>Dogecoin to the moon!</h1>
-    <p>This is my first custom website.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>idk wtf im doing and its a miracle this website works</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Stuff</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <h3>!vibe</h3>
+                <p>Creating responsive and beautiful vibes tailored to your needs.</p>
+            </div>
+            <div class="service-card">
+                <h3>!croak</h3>
+                <p>Designing engaging and intuitive croaking applications for all lillypads.</p>
+            </div>
+            <div class="service-card">
+                <h3>!ribbit</h3>
+                <p>Boosting your online presence frog sound strategies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Carousel Section -->
+    <section class="image-carousel">
+        <div class="carousel">
+            <!-- Your images go here -->
+        </div>
+    </section>
+     <!-- Image Carousel Section -->
+     <section class="image-carousel">
+        <div class="carousel">
+            <img src="images/Wrk-za04O5rbZkhBkgaaYPRA_Jn7I8h43I4viLa54h9wEgYwppSlhCeg_vbQg87vfRYlrMvtzp3-_VSN52J2peEzTPjiv7IhksOFIto.avif" alt="Artwork 1">
+            <img src="images/WgtWl8qYtAHAY26z6r43MUYkPCw0JNbkXgKfw9zVVgnSOQh6XbuPORFHHB3nNoOAepQbrDR22qQGR-qXE0gFz7VwtVyl4lpt2pLK.avif" alt="Artwork 2">
+            <img src="images/QPpKzGq-8SLWckfOuHpUzduNDgwFSOxK1aHQ6uYuVaa1GAW_U9KOojHkqOITA_kznsx5nDWtdzCnXA3xpKU_cqTtqzvb8LI5OafajA.avif" alt="Artwork 3">
+            <img src="images/oQl4H1Hx8bLslxVqXanQBn20AchJzXRJeyjeafu7kN4q4Mpf4WwG5OcLlrDAieIexYoooKLgzP6qBtgeqO-k0OrhoeMU_qu9CGdUag.avif" alt="Artwork 1">
+            <img src="images/nQnv5jq-PsZ6TLqlqpABruteIV2X5uF9i_pkm-HhT1Px7tO_byFypC4717WWTn--P46Ly_js3xkD4JuOwKdHsAy1_QB6F95NQGE19VU.avif" alt="Artwork 2">
+            <img src="images/LSHQ01BHSFr5u-pWIY0K0JtLNeZvI6ux5uoacFrMSmDrL1qvUzZUSb4AWIUlDmZwFRt899UMP7CYcuCZ30KtqBBRxY1kl7L8rT3x7A.avif" alt="Artwork 3">
+            <img src="images/k8GVaIK5zY8kGSqRtdFinL80B3rQE8TnfjpBKQj_AJZZPTaJa6ogKvwsAaNe8E6Yh3dRJU-i9X_v6EDrBzE1E46DEzgifldz5AN0Kw.avif" alt="Artwork 1">
+            <img src="images/k1xDQF25u9G75lwq2jLtPvfVeAKrVgBL6k6GlzjoMc9kq-SraKtd70QPTVKFPHEf6pXlLQfc2MP95y56-KzqKDzt4fTpzj_PGLPs.avif" alt="Artwork 2">
+            <img src="images/flALkCybXML5Y_wEbmzTtHxaaexbexLz01Kx2H2TzOBOtOGQWMRGdlC1kr3afByLeQs4xDjD64bobLE6YcE8yZQ1fym3IXxJwaQs4A.avif" alt="Artwork 3">
+            <img src="images/d5djSBhUzDG8NNdGRRxStbvJd-W4f351b6W_4BB4aXVBTGAAFEnB2zHducRTN3wcTqPEnyk0das4_1v4UrSHQaADH6jHu_5a-USPhw.avif" alt="Artwork 1">
+            <img src="images/C1KhV-1RX5dQ0hHBTMLhH56850rVoFIvZ6C8ObkZhfqrcIhvV7y41QdhgVB42CDZXXmhGs-_hHitgusHw6Hv7Yk6w3AwCHVjET0hGw.avif" alt="Artwork 2">
+            <img src="images/bTLtkFiQWy5LJOAD2b1nbv5616ZgJu9NqMVS_REJ3sTKgGneKC1osTYNZ5FZVswaWeJdUMNmYEwLIQM3u8s_4MWpYrTR5ARSXXws9Q.avif" alt="Artwork 3">
+            <img src="images/b9X5VNqRyR8CZNXvxj_i8DMd2CffP637Sb9DWlBD3Sgli3T0De2vdoofjSatq9LAD1RHUJvhFpyiyG3VfEFoXEYoBe-H4yrpb1E4bA.avif" alt="Artwork 1">
+            <img src="images/57KWiUuTP8S6Z6lm09SLlE155qKZoBVTu8w4RHuLlEExM9SwnEfvp27xRmZJDdaOBb4THdFmFXfENflgUTbO8H73KzSvtbZxEjW-0A.avif" alt="Artwork 2">
+            <img src="images/6nKDzM-GO7Paui2-hTJIxbyuU1DwsGqslGm7MJsqNJbVE9FYrvSLDjKEi95f17Ef616xk7enHoEqE5ITc8Hq41BIE0MfMnuz64iYsg.avif" alt="Artwork 3">
+            <img src="images/1APvj5wzWrazdZaGhw5DdZjsC7sE2-f3R3frDxDG65zds1moDgxA-J9T_a2j4xVgZ7IQiRbDsb4THOZNh8W3INr24n9jNobeq7qgX60.avif" alt="Artwork 1">
+            <img src="images/0vPkEf97FXOmO5RH53ICVxQkf5CB4ps9AVtBDrT08JP8VoATBOBGjDclZI2182nZgXodu-yTFk38Ku85ywaIdOtGnaeZgNh9nMYKF4s.avif" alt="Artwork 2">
+            <img src="images/xF6eNt_i7oHXnRN0JHUfUuG05v90NJ6lhLXZFg-6Q3BCqy4ZiZKPsv9hY3GN5YszJGIoQG2bcoIx7HbK3E2ERtjZuKPEK5itv8FpvQ.avif" alt="Artwork 3">
+            <img src="images/uU_XVD4y8aWJnNJjynm-YTcQZVJS9AdUVX7TJn68Gs353Xtt_AC8didXL-F9pTvsufn6lHby0w82_-v2jwG1WhffZwi9B5CDnrbYMg.avif" alt="Artwork 1">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Dogecoin to the moon!</p>
+    </footer>
+
+    <!-- JavaScript for opening random windows -->
     <script>
-        // Show the modal and the initial pop-up when the page loads
-        window.onload = function() {
-            document.getElementById("modal").style.display = "flex";
-            showPopup();
-        };
-    
-        // Function to display the initial pop-up (just in case you want it separate)
-        function showPopup() {
-            // Ask the user a question
-            let response = confirm("Do you want to stay on this awesome site?");
+        // Function to open a popup window with an image, with an event to open more popups when closed
+        function openPopupWithUnload(image) {
+            // Generate random positions for the popup windows
+            const randomTop = Math.floor(Math.random() * (window.innerHeight - 400));
+            const randomLeft = Math.floor(Math.random() * (window.innerWidth - 400));
             
-            // If they click "No", show another pop-up
-            if (!response) {
-                annoyingPopup();
+            // Open a new window with the image at a random position
+            const popup = window.open(image, '_blank', `width=400,height=400,top=${randomTop},left=${randomLeft}`);
+            
+            // Add event to open 3 more popups when this popup is closed
+            if (popup) {
+                popup.onbeforeunload = () => {
+                    openThreeRandomPopups();
+                };
             }
         }
     
-        // Function to keep opening pop-ups if they keep saying "No"
-        function annoyingPopup() {
-            let response = confirm("Are you sure you want to leave? There's so much to see here!");
-            
-            // Keep calling the function if they click "No"
-            if (!response) {
-                annoyingPopup();
-            } else {
-                alert("Great! We knew you'd stay.");
+        // Function to open 3 random images as popups
+        function openThreeRandomPopups() {
+            const images = [
+                "images/Wrk-za04O5rbZkhBkgaaYPRA_Jn7I8h43I4viLa54h9wEgYwppSlhCeg_vbQg87vfRYlrMvtzp3-_VSN52J2peEzTPjiv7IhksOFIto.avif",
+                "images/WgtWl8qYtAHAY26z6r43MUYkPCw0JNbkXgKfw9zVVgnSOQh6XbuPORFHHB3nNoOAepQbrDR22qQGR-qXE0gFz7VwtVyl4lpt2pLK.avif",
+                "images/QPpKzGq-8SLWckfOuHpUzduNDgwFSOxK1aHQ6uYuVaa1GAW_U9KOojHkqOITA_kznsx5nDWtdzCnXA3xpKU_cqTtqzvb8LI5OafajA.avif",
+                "images/oQl4H1Hx8bLslxVqXanQBn20AchJzXRJeyjeafu7kN4q4Mpf4WwG5OcLlrDAieIexYoooKLgzP6qBtgeqO-k0OrhoeMU_qu9CGdUag.avif",
+                "images/nQnv5jq-PsZ6TLqlqpABruteIV2X5uF9i_pkm-HhT1Px7tO_byFypC4717WWTn--P46Ly_js3xkD4JuOwKdHsAy1_QB6F95NQGE19VU.avif",
+                "images/LSHQ01BHSFr5u-pWIY0K0JtLNeZvI6ux5uoacFrMSmDrL1qvUzZUSb4AWIUlDmZwFRt899UMP7CYcuCZ30KtqBBRxY1kl7L8rT3x7A.avif",
+                "images/k8GVaIK5zY8kGSqRtdFinL80B3rQE8TnfjpBKQj_AJZZPTaJa6ogKvwsAaNe8E6Yh3dRJU-i9X_v6EDrBzE1E46DEzgifldz5AN0Kw.avif",
+                "images/k1xDQF25u9G75lwq2jLtPvfVeAKrVgBL6k6GlzjoMc9kq-SraKtd70QPTVKFPHEf6pXlLQfc2MP95y56-KzqKDzt4fTpzj_PGLPs.avif",
+                "images/flALkCybXML5Y_wEbmzTtHxaaexbexLz01Kx2H2TzOBOtOGQWMRGdlC1kr3afByLeQs4xDjD64bobLE6YcE8yZQ1fym3IXxJwaQs4A.avif",
+                "images/d5djSBhUzDG8NNdGRRxStbvJd-W4f351b6W_4BB4aXVBTGAAFEnB2zHducRTN3wcTqPEnyk0das4_1v4UrSHQaADH6jHu_5a-USPhw.avif",
+                "images/C1KhV-1RX5dQ0hHBTMLhH56850rVoFIvZ6C8ObkZhfqrcIhvV7y41QdhgVB42CDZXXmhGs-_hHitgusHw6Hv7Yk6w3AwCHVjET0hGw.avif",
+                "images/bTLtkFiQWy5LJOAD2b1nbv5616ZgJu9NqMVS_REJ3sTKgGneKC1osTYNZ5FZVswaWeJdUMNmYEwLIQM3u8s_4MWpYrTR5ARSXXws9Q.avif",
+                "images/b9X5VNqRyR8CZNXvxj_i8DMd2CffP637Sb9DWlBD3Sgli3T0De2vdoofjSatq9LAD1RHUJvhFpyiyG3VfEFoXEYoBe-H4yrpb1E4bA.avif",
+                "images/57KWiUuTP8S6Z6lm09SLlE155qKZoBVTu8w4RHuLlEExM9SwnEfvp27xRmZJDdaOBb4THdFmFXfENflgUTbO8H73KzSvtbZxEjW-0A.avif",
+                "images/6nKDzM-GO7Paui2-hTJIxbyuU1DwsGqslGm7MJsqNJbVE9FYrvSLDjKEi95f17Ef616xk7enHoEqE5ITc8Hq41BIE0MfMnuz64iYsg.avif",
+                "images/1APvj5wzWrazdZaGhw5DdZjsC7sE2-f3R3frDxDG65zds1moDgxA-J9T_a2j4xVgZ7IQiRbDsb4THOZNh8W3INr24n9jNobeq7qgX60.avif",
+                "images/0vPkEf97FXOmO5RH53ICVxQkf5CB4ps9AVtBDrT08JP8VoATBOBGjDclZI2182nZgXodu-yTFk38Ku85ywaIdOtGnaeZgNh9nMYKF4s.avif",
+                "images/xF6eNt_i7oHXnRN0JHUfUuG05v90NJ6lhLXZFg-6Q3BCqy4ZiZKPsv9hY3GN5YszJGIoQG2bcoIx7HbK3E2ERtjZuKPEK5itv8FpvQ.avif",
+                "images/uU_XVD4y8aWJnNJjynm-YTcQZVJS9AdUVX7TJn68Gs353Xtt_AC8didXL-F9pTvsufn6lHby0w82_-v2jwG1WhffZwi9B5CDnrbYMg.avif"
+                // Add the rest of your image paths here
+            ];
+    
+            // Open 3 random images as popups
+            for (let i = 0; i < 3; i++) {
+                const randomImage = images[Math.floor(Math.random() * images.length)];
+                openPopupWithUnload(randomImage);
             }
         }
     
-        // Function to close the modal if the user clicks "Yes"
-        function closeModal() {
-            document.getElementById("modal").style.display = "none";
-            alert("Great! We knew you'd stay.");
-        }
+        // Function to open an initial set of popups with all images
+        function openRandomWindows() {
+            const images = [
+                "images/Wrk-za04O5rbZkhBkgaaYPRA_Jn7I8h43I4viLa54h9wEgYwppSlhCeg_vbQg87vfRYlrMvtzp3-_VSN52J2peEzTPjiv7IhksOFIto.avif",
+                "images/WgtWl8qYtAHAY26z6r43MUYkPCw0JNbkXgKfw9zVVgnSOQh6XbuPORFHHB3nNoOAepQbrDR22qQGR-qXE0gFz7VwtVyl4lpt2pLK.avif",
+                "images/QPpKzGq-8SLWckfOuHpUzduNDgwFSOxK1aHQ6uYuVaa1GAW_U9KOojHkqOITA_kznsx5nDWtdzCnXA3xpKU_cqTtqzvb8LI5OafajA.avif",
+                "images/oQl4H1Hx8bLslxVqXanQBn20AchJzXRJeyjeafu7kN4q4Mpf4WwG5OcLlrDAieIexYoooKLgzP6qBtgeqO-k0OrhoeMU_qu9CGdUag.avif",
+                "images/nQnv5jq-PsZ6TLqlqpABruteIV2X5uF9i_pkm-HhT1Px7tO_byFypC4717WWTn--P46Ly_js3xkD4JuOwKdHsAy1_QB6F95NQGE19VU.avif",
+                "images/LSHQ01BHSFr5u-pWIY0K0JtLNeZvI6ux5uoacFrMSmDrL1qvUzZUSb4AWIUlDmZwFRt899UMP7CYcuCZ30KtqBBRxY1kl7L8rT3x7A.avif",
+                "images/k8GVaIK5zY8kGSqRtdFinL80B3rQE8TnfjpBKQj_AJZZPTaJa6ogKvwsAaNe8E6Yh3dRJU-i9X_v6EDrBzE1E46DEzgifldz5AN0Kw.avif",
+                "images/k1xDQF25u9G75lwq2jLtPvfVeAKrVgBL6k6GlzjoMc9kq-SraKtd70QPTVKFPHEf6pXlLQfc2MP95y56-KzqKDzt4fTpzj_PGLPs.avif",
+                "images/flALkCybXML5Y_wEbmzTtHxaaexbexLz01Kx2H2TzOBOtOGQWMRGdlC1kr3afByLeQs4xDjD64bobLE6YcE8yZQ1fym3IXxJwaQs4A.avif",
+                "images/d5djSBhUzDG8NNdGRRxStbvJd-W4f351b6W_4BB4aXVBTGAAFEnB2zHducRTN3wcTqPEnyk0das4_1v4UrSHQaADH6jHu_5a-USPhw.avif",
+                "images/C1KhV-1RX5dQ0hHBTMLhH56850rVoFIvZ6C8ObkZhfqrcIhvV7y41QdhgVB42CDZXXmhGs-_hHitgusHw6Hv7Yk6w3AwCHVjET0hGw.avif",
+                "images/bTLtkFiQWy5LJOAD2b1nbv5616ZgJu9NqMVS_REJ3sTKgGneKC1osTYNZ5FZVswaWeJdUMNmYEwLIQM3u8s_4MWpYrTR5ARSXXws9Q.avif",
+                "images/b9X5VNqRyR8CZNXvxj_i8DMd2CffP637Sb9DWlBD3Sgli3T0De2vdoofjSatq9LAD1RHUJvhFpyiyG3VfEFoXEYoBe-H4yrpb1E4bA.avif",
+                "images/57KWiUuTP8S6Z6lm09SLlE155qKZoBVTu8w4RHuLlEExM9SwnEfvp27xRmZJDdaOBb4THdFmFXfENflgUTbO8H73KzSvtbZxEjW-0A.avif",
+                "images/6nKDzM-GO7Paui2-hTJIxbyuU1DwsGqslGm7MJsqNJbVE9FYrvSLDjKEi95f17Ef616xk7enHoEqE5ITc8Hq41BIE0MfMnuz64iYsg.avif",
+                "images/1APvj5wzWrazdZaGhw5DdZjsC7sE2-f3R3frDxDG65zds1moDgxA-J9T_a2j4xVgZ7IQiRbDsb4THOZNh8W3INr24n9jNobeq7qgX60.avif",
+                "images/0vPkEf97FXOmO5RH53ICVxQkf5CB4ps9AVtBDrT08JP8VoATBOBGjDclZI2182nZgXodu-yTFk38Ku85ywaIdOtGnaeZgNh9nMYKF4s.avif",
+                "images/xF6eNt_i7oHXnRN0JHUfUuG05v90NJ6lhLXZFg-6Q3BCqy4ZiZKPsv9hY3GN5YszJGIoQG2bcoIx7HbK3E2ERtjZuKPEK5itv8FpvQ.avif",
+                "images/uU_XVD4y8aWJnNJjynm-YTcQZVJS9AdUVX7TJn68Gs353Xtt_AC8didXL-F9pTvsufn6lHby0w82_-v2jwG1WhffZwi9B5CDnrbYMg.avif"
+                // Add the rest of your image paths here
+            ];
     
-        // Function to show another annoying pop-up if the user clicks "No"
-        function showAnnoyingPopup() {
-            alert("Are you sure you want to leave? There's so much to see here!");
+            // Open a popup for each image in the array
+            images.forEach(image => openPopupWithUnload(image));
         }
     </script>
     
-      
+        
+        
+        
+
 </body>
 </html>
+
+
