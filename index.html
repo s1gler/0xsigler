@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="images/your-logo.png" alt="Logo" class="logo">
+                <img src="images/3178_transparent.png" alt="Logo" class="logo">
             </div>
             <ul class="nav-links" id="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -21,6 +21,10 @@
                 <li><a href="#contact">Nope</a></li>
             </ul>
             <div class="menu-toggle" id="menu-toggle">☰</div>
+<ul class="nav-links" id="nav-links">
+    <!-- Menu items -->
+</ul>
+
         </nav>
     </header>
     
@@ -98,11 +102,11 @@
     <!-- JavaScript for opening random windows -->
     <script>
     document.getElementById("menu-toggle").addEventListener("click", function() {
-        const navLinks = document.getElementById("nav-links");
-        navLinks.classList.toggle("active");
-    });
-    
-        // Function to open a popup window with an image, with an event to open more popups when closed
+    const navLinks = document.getElementById("nav-links");
+    navLinks.classList.toggle("active");
+});
+
+// Function to open a popup window with an image, with an event to open more popups when closed
         function openPopupWithUnload(image) {
             // Generate random positions for the popup windows
             const randomTop = Math.floor(Math.random() * (window.innerHeight - 400));
