@@ -12,18 +12,18 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="images/3178_transparent.png" alt="Logo" class="logo">
+                <img src="images/your-logo.png" alt="Logo" class="logo">
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Stuff</a></li>
-                <!-- Update the "Nope" button to trigger JavaScript function -->
-                <li><a href="javascript:void(0);" onclick="openRandomWindows()">Nope</a></li>
+                <li><a href="#contact">Nope</a></li>
             </ul>
-            <div class="menu-toggle">☰</div>
+            <div class="menu-toggle" id="menu-toggle">☰</div>
         </nav>
     </header>
+    
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -97,6 +97,11 @@
 
     <!-- JavaScript for opening random windows -->
     <script>
+    document.getElementById("menu-toggle").addEventListener("click", function() {
+        const navLinks = document.getElementById("nav-links");
+        navLinks.classList.toggle("active");
+    });
+    
         // Function to open a popup window with an image, with an event to open more popups when closed
         function openPopupWithUnload(image) {
             // Generate random positions for the popup windows

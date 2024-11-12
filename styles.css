@@ -55,8 +55,8 @@ header {
 }
 
 .logo {
-    height: 50px; /* Adjust height as needed */
-    width: auto;  /* Maintains aspect ratio */
+    height: 50px;
+    width: auto;
     display: block;
 }
 
@@ -135,29 +135,26 @@ header {
 
 .carousel {
     display: flex;
-    gap: 1rem; /* Space between images */
-    animation: scroll 60s linear infinite; /* Slow scroll speed for smooth effect */
-    width: calc(200px * 20 + 1rem * 20); /* Adjusted width to fit all images */
+    gap: 1rem;
+    animation: scroll 60s linear infinite;
+    width: calc(200px * 20 + 1rem * 20);
 }
 
 .carousel img {
-    width: 200px; /* Adjust width to fit your layout */
+    width: 200px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Keyframes for Continuous Scrolling */
 @keyframes scroll {
     from {
         transform: translateX(0);
     }
     to {
-        transform: translateX(-50%); /* Moves halfway, creating a loop */
+        transform: translateX(-50%);
     }
 }
-
-
 
 /* Footer */
 footer {
@@ -170,16 +167,39 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Navbar changes for mobile */
     .nav-links {
         display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #4cb2b2;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex;
     }
 
     .menu-toggle {
         display: block;
     }
 
+    /* Stack service cards on mobile */
     .service-cards {
         flex-direction: column;
     }
+
+    /* Hero section text adjustments */
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .cta-button {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
 }
+
 
