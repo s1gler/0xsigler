@@ -1,12 +1,20 @@
 /* Global Reset and Base Styles */
+@font-face {
+    font-family: 'Superscratchy'; /* Use the desired name for your font */
+    src: url('fonts/Superscratchy.ttf') format('truetype'); /* Correct path to your font file */
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Superscratchy', sans-serif; /* Use your custom font */
 }
 
 body {
+    font-family: 'Superscratchy', sans-serif; /* Use 'Superscratchy' as the custom font name */
     background-color: #4cb2b2;
     color: #333;
     line-height: 1.6;
@@ -97,15 +105,25 @@ header {
 .cta-button:hover {
     background-color: #3a9acc;
 }
-/* Add spacing above the "About Me" section */
 #about {
-    padding-top: 150px; /* Adjust the padding value as needed */
-    margin-top: -40px; /* Compensates for the added padding to avoid extra space above */
+    max-width: 800px; /* Limit width to improve readability */
+    margin: 0 auto; /* Center-align the section */
+    padding: 150px 2rem 0; /* Top padding for spacing; horizontal padding for spacing */
+    text-align: center; /* Center the text */
+    padding-bottom: 0; /* Remove extra padding at the bottom */
+    margin-bottom: 0; /* Remove any extra margin at the bottom */
 }
-#about {
-    padding-bottom: 0; /* Removes any extra padding at the bottom */
-    margin-bottom: 0; /* Removes any extra margin at the bottom */
+.services h2 {
+    margin-bottom: 5rem; /* Additional space between heading and cards */
 }
+.services {
+    padding-bottom: 6rem; /* Increased space below the entire services section */
+}
+
+.service-cards {
+    margin-bottom: 4rem; /* Increased space below the cards */
+}
+
 
 /* About, Services, and Contact Sections */
 .about, .services, .contact {
@@ -120,18 +138,48 @@ header {
     flex-wrap: wrap;
 }
 
+/* Service Card Links */
+.service-card-link {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit color from parent */
+    display: inline-block;
+    width: 300px; /* Consistent width for each card */
+    transition: transform 0.3s ease;
+}
+
+/* Individual Service Card Styling */
 .service-card {
-    flex: 1 1 300px;
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 80%;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.service-card:hover {
-    transform: translateY(-5px);
+/* Hover Effect for Service Card */
+.service-card-link:hover .service-card {
+    transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Service Card Headings */
+.service-card h3 {
+    font-family: 'Superscratchy', sans-serif; /* Use 'Superscratchy' as the custom font name */
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333; /* Adjust color as needed */
+}
+
+/* Service Card Paragraph Text */
+.service-card p {
+    font-size: 1rem;
+    color: #666;
 }
 
 /* Image Carousel Section */
