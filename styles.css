@@ -228,8 +228,8 @@ header {
     }
 
     .service-card-link {
-        width: 90%; /* Allow cards to take up most of the screen width on mobile */
-        max-width: 300px; /* Set a max width to prevent them from getting too large */
+        width: 100%; /* Allow cards to take up most of the screen width on mobile */
+        max-width: 400px; /* Set a max width to prevent them from getting too large */
     }
 }
 
