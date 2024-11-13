@@ -176,12 +176,36 @@ header {
 
 /* Footer */
 footer {
-    background-color: #333;
+    background-color: #4cb2b2;
     color: #fff;
     text-align: center;
     padding: 2rem;
-    margin-top: 2rem;
 }
+
+.social-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 40px; /* Icon size */
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.social-links img {
+    width: 500%;
+    height: auto;
+    filter: brightness(0) invert(1); /* Make the icons white if they are black */
+}
+
+.social-links a:hover {
+    transform: scale(4.1); /* Enlarge the icon on hover */
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
