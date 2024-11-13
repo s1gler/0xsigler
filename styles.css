@@ -37,13 +37,46 @@ header {
     align-items: center;
 }
 
+/* Navigation Links */
 .nav-links {
     list-style: none;
     display: flex;
     gap: 2rem;
-    transition: max-height 0.3s ease-in-out; /* Smooth transition */
     overflow: hidden;
-    max-height: 0; /* Hidden by default */
+    transition: max-height 0.3s ease-in-out;
+}
+
+/* Mobile-specific styling to hide menu initially */
+@media (max-width: 768px) {
+    .nav-links {
+        max-height: 0; /* Hidden by default on mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #4cb2b2;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        max-height: 200px; /* Set a max height when menu is open */
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* Ensure menu is always visible on desktop */
+@media (min-width: 769px) {
+    .nav-links {
+        display: flex;
+        max-height: none; /* Prevents max-height restriction on desktop */
+    }
+
+    .menu-toggle {
+        display: none; /* Hide the menu toggle button on desktop */
+    }
 }
 
 .nav-links.active {
