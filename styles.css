@@ -186,25 +186,28 @@ footer {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    align-items: center; /* Center icons vertically */
+    gap: 2rem;
 }
 
 .social-links a {
-    display: inline-block;
-    width: 40px; /* Icon size */
-    height: 40px;
+    display: flex; /* Ensures the icon aligns within the link */
+    align-items: center; /* Center icon vertically inside link */
+    width: 30px;
+    height: 30px;
     transition: transform 0.3s ease;
 }
 
 .social-links img {
-    width: 500%;
+    width: 100%;
     height: auto;
-    filter: brightness(0) invert(1); /* Make the icons white if they are black */
+    display: block; /* Prevents extra space below images */
 }
 
 .social-links a:hover {
-    transform: scale(4.1); /* Enlarge the icon on hover */
+    transform: scale(2.1); /* Adds a zoom effect on hover */
 }
+
 
 
 /* Responsive Design */
