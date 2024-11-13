@@ -158,8 +158,10 @@ header {
 /* Resize "Stuff" section cards for mobile */
 @media (max-width: 768px) {
     .service-card {
-        flex: 1 1 80%; /* Makes each card narrower on mobile */
-        padding: 1rem; /* Adjust padding to make it more compact */
+        flex: 1 1 90%; /* Set to a narrower width */
+        max-width: 300px; /* Limit the maximum width to make them smaller */
+        padding: 1rem; /* Adjust padding to keep it compact */
+        margin: 0 auto; /* Center the cards on mobile */
     }
 }
 
