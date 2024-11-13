@@ -199,9 +199,11 @@ footer {
 }
 
 .social-links img {
-    width: 100%;
+    width: 30px; /* Set fixed width */
+    height: 30px; /* Set fixed height */
     height: auto;
     display: block; /* Prevents extra space below images */
+    object-fit: contain; /* Ensures the image fits well within its container */
 }
 
 .social-links a:hover {
