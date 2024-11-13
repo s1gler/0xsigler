@@ -214,11 +214,15 @@ header {
 }
 /* Resize "Stuff" section cards for mobile */
 @media (max-width: 768px) {
-    .service-card {
-        flex: 1 1 90%; /* Set to a narrower width */
-        max-width: 300px; /* Limit the maximum width to make them smaller */
-        padding: 1rem; /* Adjust padding to keep it compact */
-        margin: 0 auto; /* Center the cards on mobile */
+    .service-cards {
+        flex-direction: column; /* Stack the cards vertically */
+        align-items: center; /* Center-align the cards */
+        margin: 0 auto; /* Center the entire service-cards container */
+    }
+
+    .service-card-link {
+        width: 90%; /* Allow cards to take up most of the screen width on mobile */
+        max-width: 300px; /* Set a max width to prevent them from getting too large */
     }
 }
 
