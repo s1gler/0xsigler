@@ -155,6 +155,13 @@ header {
         transform: translateX(-50%);
     }
 }
+/* Resize "Stuff" section cards for mobile */
+@media (max-width: 768px) {
+    .service-card {
+        flex: 1 1 80%; /* Makes each card narrower on mobile */
+        padding: 1rem; /* Adjust padding to make it more compact */
+    }
+}
 
 /* Footer */
 footer {

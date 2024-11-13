@@ -89,6 +89,15 @@
 
     <!-- JavaScript for opening random windows -->
     <script>
+
+// Smooth scroll to the "About" section with offset
+document.querySelector('.cta-button').addEventListener('click', function(event) {
+    event.preventDefault();
+    const aboutSection = document.getElementById('about');
+    const offset = aboutSection.offsetTop - 100; // Adjust 100px offset as needed
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     // Mobile Menu Toggle
     document.getElementById("menu-toggle").addEventListener("click", function() {
