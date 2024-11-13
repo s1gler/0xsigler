@@ -41,6 +41,13 @@ header {
     list-style: none;
     display: flex;
     gap: 2rem;
+    transition: max-height 0.3s ease-in-out; /* Smooth transition */
+    overflow: hidden;
+    max-height: 0; /* Hidden by default */
+}
+
+.nav-links.active {
+    max-height: 200px; /* Set a max height when menu is open */
 }
 
 .nav-links li {

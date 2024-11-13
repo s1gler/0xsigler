@@ -189,12 +189,22 @@ function openRandomWindows() {
     }
 }
 
-        // Wait for DOM content to load, then attach mobile menu toggle listener
-        document.addEventListener("DOMContentLoaded", function() {
-            // Mobile Menu Toggle
-            document.getElementById("menu-toggle").addEventListener("click", function() {
-                const navLinks = document.getElementById("nav-links");
-                navLinks.classList.toggle("active");
+document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navLinksList = document.querySelectorAll(".nav-links a");
+
+    // Toggle menu visibility when clicking the menu icon
+    menuToggle.addEventListener("click", function() {
+        navLinks.classList.toggle("active");
+    });
+
+    // Close the menu when clicking any link inside the menu
+    navLinksList.forEach(link => {
+        link.addEventListener("click", function() {
+            navLinks.classList.remove("active");
+        });
+                
             });
         });
     </script>
