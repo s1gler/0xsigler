@@ -97,6 +97,15 @@ header {
 .cta-button:hover {
     background-color: #3a9acc;
 }
+/* Add spacing above the "About Me" section */
+#about {
+    padding-top: 150px; /* Adjust the padding value as needed */
+    margin-top: -40px; /* Compensates for the added padding to avoid extra space above */
+}
+#about {
+    padding-bottom: 0; /* Removes any extra padding at the bottom */
+    margin-bottom: 0; /* Removes any extra margin at the bottom */
+}
 
 /* About, Services, and Contact Sections */
 .about, .services, .contact {
