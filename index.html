@@ -139,66 +139,50 @@ document.addEventListener("DOMContentLoaded", function () {
     const carousel = document.querySelector(".carousel");
     let isPressing = false;
     let startX = 0;
-    let currentScrollLeft = 0;
-    let holdTimer = null;
+    let scrollLeft = 0;
+    let autoScrollInterval;
+
+    // Auto-scroll function
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            carousel.scrollLeft += 1; // Adjust the speed as needed
+        }, 20); // Adjust the interval for smoother/faster scroll
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+
+    // Start auto-scroll on load
+    startAutoScroll();
 
     carousel.addEventListener("pointerdown", function (event) {
-        // Prevent default behavior
-        event.preventDefault();
-
         isPressing = true;
         startX = event.clientX;
-        currentScrollLeft = carousel.scrollLeft;
-
-        // Set a timer for press-and-hold
-        holdTimer = setTimeout(() => {
-            if (isPressing) {
-                const target = event.target.closest("img");
-                if (target) {
-                    target.style.transform = "scale(1.2)"; // Slightly enlarge
-                }
-            }
-        }, 500); // 500ms for press-and-hold
+        scrollLeft = carousel.scrollLeft;
+        stopAutoScroll(); // Stop auto-scroll on touch
     });
 
     carousel.addEventListener("pointermove", function (event) {
         if (!isPressing) return;
-
-    // Only prevent default if there's significant movement
-    if (Math.abs(event.clientX - startX) > 5) {
         event.preventDefault();
-    }
-
-    const xDiff = event.clientX - startX;
-    carousel.scrollLeft = currentScrollLeft - xDiff;
+        const xDiff = event.clientX - startX;
+        carousel.scrollLeft = scrollLeft - xDiff; // Scroll manually based on swipe
     });
 
-    carousel.addEventListener("pointerup", function (event) {
-        clearTimeout(holdTimer);
+    carousel.addEventListener("pointerup", function () {
         isPressing = false;
-
-        const target = event.target.closest("img");
-        if (target) {
-            // Reset image scale
-            target.style.transform = "scale(1)";
-        }
+        startAutoScroll(); // Resume auto-scroll on release
     });
 
     carousel.addEventListener("pointercancel", function () {
-        clearTimeout(holdTimer);
         isPressing = false;
-
-        const images = carousel.querySelectorAll("img");
-        images.forEach((img) => (img.style.transform = "scale(1)")); // Reset all images
+        startAutoScroll(); // Resume auto-scroll on cancel
     });
 
-    carousel.addEventListener("click", function (event) {
-        // Prevent the click event if it was a swipe or press-and-hold
-        if (isPressing) {
-            event.preventDefault();
-            isPressing = false;
-        }
-    });
+    // Stop auto-scroll on pointerenter (optional for desktop users)
+    carousel.addEventListener("pointerenter", stopAutoScroll);
+    carousel.addEventListener("pointerleave", startAutoScroll);
 });
 
 // Smooth scroll to the "About" section with precise offset

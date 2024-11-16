@@ -233,9 +233,14 @@ header {
 .carousel {
     display: flex;
     gap: 1rem;
-    animation: scroll 60s linear infinite;
-    width: calc(200px * 20 + 1rem * 20);
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    -webkit-overflow-scrolling: touch; /* For better touch scrolling on iOS */
 }
+.carousel::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for a cleaner look */
+}
+
 
 .carousel img {
     width: 200px;
