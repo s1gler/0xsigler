@@ -56,7 +56,6 @@ header {
         right: 0;
         background-color: #4cb2b2;
         width: 100%;
-        transition: ease-in-out;
     }
 
     .nav-links.active {
@@ -231,43 +230,18 @@ header {
     padding: 1rem 0;
 }
 
-.scrolling-carousel {
+.carousel {
     display: flex;
-    white-space: nowrap;
     gap: 1rem;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    height: 250px; /* Set the height of the carousel */
-    align-items: center; /* Center images vertically */
-    padding: 1rem; /* Add some padding for better visual spacing */
-    position: relative; /* For precise control */
-}
-.carousel::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for a cleaner look */
+    animation: scroll 60s linear infinite;
+    width: calc(200px * 20 + 1rem * 20);
 }
 
-
-.carousel-container img {
-    max-height: 200px; /* Limit the height of the images */
-    width: auto; /* Keep the aspect ratio intact */
+.carousel img {
+    width: 200px;
+    height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-    will-change: transform;
-    cursor: grab;
-}
-
-/* Mobile-specific adjustments */
-@media (max-width: 768px) {
-    .scrolling-carousel {
-        height: 220px; /* Adjust carousel height for smaller screens */
-        padding: 0.5rem; /* Adjust padding for mobile spacing */
-    }
-
-    .carousel-container img {
-        max-height: 150px; /* Smaller images for mobile */
-    }
 }
 
 @keyframes scroll {
@@ -366,3 +340,4 @@ footer {
         padding: 0.5rem 1rem;
     }
 }
+
