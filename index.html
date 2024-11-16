@@ -145,10 +145,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Auto-scroll function using requestAnimationFrame
     function startAutoScroll() {
         function scrollStep() {
-            const scrollSpeed = carousel.offsetWidth / 100; // Dynamic speed based on carousel width
+            const scrollSpeed = 1; // Adjust the speed as needed
             carousel.scrollLeft += scrollSpeed;
 
-            // Check if we need to reset for infinite scrolling
+            // Reset for infinite scroll
             if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
                 carousel.scrollLeft = 0; // Loop back to the start
             }
@@ -165,118 +165,60 @@ document.addEventListener("DOMContentLoaded", function () {
     // Start auto-scroll on load
     startAutoScroll();
 
-    // Pointer down: stop auto-scroll and prepare for manual swipe
+    // Pointer down: prepare for manual interaction and stop auto-scroll
     carousel.addEventListener("pointerdown", function (event) {
         isPressing = true;
         startX = event.clientX;
         scrollLeft = carousel.scrollLeft;
-        stopAutoScroll(); // Stop auto-scroll on touch
+        stopAutoScroll();
     });
 
     // Pointer move: handle manual scrolling
     carousel.addEventListener("pointermove", function (event) {
         if (!isPressing) return;
-
         const xDiff = event.clientX - startX;
-
-        // Add threshold to avoid accidental scroll
-        if (Math.abs(xDiff) < 5) return;
-
-        event.preventDefault(); // Prevent default only for significant horizontal swipes
         carousel.scrollLeft = scrollLeft - xDiff;
     });
 
-    // Pointer up or cancel: resume auto-scroll
+    // Pointer up or cancel: resume auto-scroll after interaction
     carousel.addEventListener("pointerup", function () {
         isPressing = false;
-        startAutoScroll(); // Resume auto-scroll on release
+        startAutoScroll();
     });
 
     carousel.addEventListener("pointercancel", function () {
         isPressing = false;
-        startAutoScroll(); // Resume auto-scroll on cancel
+        startAutoScroll();
     });
 
-    // Stop auto-scroll when pointer enters (optional for desktop users)
-    carousel.addEventListener("pointerenter", stopAutoScroll);
-    carousel.addEventListener("pointerleave", startAutoScroll);
-});
+    // Mouse enter: stop auto-scroll for desktop hover
+    carousel.addEventListener("mouseenter", stopAutoScroll);
 
-// Smooth scroll to the "About" section with precise offset
-document.querySelector('.cta-button').addEventListener('click', function (event) {
-    event.preventDefault();
-
-    const aboutSection = document.getElementById('about');
-
-    // Calculate the precise offset using the element's position in the viewport
-    const sectionTop = aboutSection.getBoundingClientRect().top + window.pageYOffset;
-
-    const offset = sectionTop - 69; // Adjust the 80px offset as needed for better positioning
-
-    window.scrollTo({ top: offset, behavior: 'smooth' });
-});
-
-// Define openRandomWindows function globally
-function openRandomWindows() {
-    const images = [
-        "images/Wrk-za04O5rbZkhBkgaaYPRA_Jn7I8h43I4viLa54h9wEgYwppSlhCeg_vbQg87vfRYlrMvtzp3-_VSN52J2peEzTPjiv7IhksOFIto.avif",
-        "images/WgtWl8qYtAHAY26z6r43MUYkPCw0JNbkXgKfw9zVVgnSOQh6XbuPORFHHB3nNoOAepQbrDR22qQGR-qXE0gFz7VwtVyl4lpt2pLK.avif",
-        "images/QPpKzGq-8SLWckfOuHpUzduNDgwFSOxK1aHQ6uYuVaa1GAW_U9KOojHkqOITA_kznsx5nDWtdzCnXA3xpKU_cqTtqzvb8LI5OafajA.avif",
-        "images/oQl4H1Hx8bLslxVqXanQBn20AchJzXRJeyjeafu7kN4q4Mpf4W5OcLlrDAieIexYoooKLgzP6qBtgeqO-k0OrhoeMU_qu9CGdUag.avif",
-        // Add all other image paths
-    ];
-
-    // Function to open a single popup with a random image
-    function openPopupWithUnload(image) {
-        const randomTop = Math.floor(Math.random() * (window.innerHeight - 400));
-        const randomLeft = Math.floor(Math.random() * (window.innerWidth - 400));
-        const popup = window.open(image, '_blank', `width=400,height=400,top=${randomTop},left=${randomLeft}`);
-
-        if (popup) {
-            popup.onbeforeunload = function () {
-                openThreeRandomPopups();
-            };
-        }
-    }
-
-    // Function to open three random popups
-    function openThreeRandomPopups() {
-        for (let i = 0; i < 3; i++) {
-            const randomImage = images[Math.floor(Math.random() * images.length)];
-            openPopupWithUnload(randomImage);
-        }
-    }
-
-    // Check if the user is on a mobile device
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-        // On mobile, open only one random popup
-        const randomImage = images[Math.floor(Math.random() * images.length)];
-        openPopupWithUnload(randomImage);
-    } else {
-        // On desktop, open multiple popups
-        openThreeRandomPopups();
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    const menuToggle = document.getElementById("menu-toggle");
-    const navLinks = document.getElementById("nav-links");
-    const navLinksList = document.querySelectorAll(".nav-links a");
-
-    // Toggle menu visibility when clicking the menu icon
-    menuToggle.addEventListener("click", function () {
-        navLinks.classList.toggle("active");
+    // Mouse leave: resume auto-scroll for desktop hover
+    carousel.addEventListener("mouseleave", function () {
+        if (!isPressing) startAutoScroll();
     });
 
-    // Close the menu when clicking any link inside the menu
-    navLinksList.forEach(link => {
-        link.addEventListener("click", function () {
-            navLinks.classList.remove("active");
-        });
+    // Touch handling for mobile
+    carousel.addEventListener("touchstart", function (event) {
+        isPressing = true;
+        startX = event.touches[0].clientX; // Use touches[0] for touch devices
+        scrollLeft = carousel.scrollLeft;
+        stopAutoScroll();
+    });
+
+    carousel.addEventListener("touchmove", function (event) {
+        if (!isPressing) return;
+        const xDiff = event.touches[0].clientX - startX;
+        carousel.scrollLeft = scrollLeft - xDiff;
+    });
+
+    carousel.addEventListener("touchend", function () {
+        isPressing = false;
+        startAutoScroll();
     });
 });
+
     </script>
 
 </body>
