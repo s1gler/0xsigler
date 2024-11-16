@@ -141,23 +141,23 @@ let startX;
 let scrollLeft;
 let autoScrollInterval;
 
-// Function to start auto-scrolling
+// Function to start auto-scroll
 function startAutoScroll() {
     stopAutoScroll(); // Clear any previous intervals
     autoScrollInterval = setInterval(() => {
-        carousel.scrollLeft += 1; // Adjust speed as needed
-    }, 20); // Smooth, consistent scrolling speed
+        carousel.scrollLeft += 1; // Adjust speed here
+    }, 20); // Smooth scrolling every 20ms
 }
 
-// Function to stop auto-scrolling
+// Function to stop auto-scroll
 function stopAutoScroll() {
     clearInterval(autoScrollInterval);
 }
 
-// Restart auto-scroll with a delay
+// Restart auto-scroll after interaction
 function restartAutoScroll() {
     stopAutoScroll();
-    setTimeout(startAutoScroll, 2000); // Delay before resuming auto-scroll
+    setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
 }
 
 // Mouse events for desktop
@@ -165,7 +165,7 @@ carousel.addEventListener('mousedown', (e) => {
     isDragging = true;
     startX = e.pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
-    stopAutoScroll(); // Pause auto-scroll on drag
+    stopAutoScroll(); // Pause auto-scroll on interaction
     carousel.style.cursor = 'grabbing';
 });
 
@@ -178,14 +178,14 @@ carousel.addEventListener('mousemove', (e) => {
 
 carousel.addEventListener('mouseup', () => {
     isDragging = false;
-    restartAutoScroll(); // Resume auto-scroll after interaction
     carousel.style.cursor = 'grab';
+    restartAutoScroll(); // Resume auto-scroll
 });
 
 carousel.addEventListener('mouseleave', () => {
     if (isDragging) {
         isDragging = false;
-        restartAutoScroll(); // Resume auto-scroll after interaction
+        restartAutoScroll(); // Resume auto-scroll
     }
     carousel.style.cursor = 'grab';
 });
@@ -195,7 +195,7 @@ carousel.addEventListener('touchstart', (e) => {
     isDragging = true;
     startX = e.touches[0].pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
-    stopAutoScroll(); // Pause auto-scroll on touch
+    stopAutoScroll(); // Pause auto-scroll on interaction
 });
 
 carousel.addEventListener('touchmove', (e) => {
@@ -207,15 +207,15 @@ carousel.addEventListener('touchmove', (e) => {
 
 carousel.addEventListener('touchend', () => {
     isDragging = false;
-    restartAutoScroll(); // Resume auto-scroll after interaction
+    restartAutoScroll(); // Resume auto-scroll
 });
 
 carousel.addEventListener('touchcancel', () => {
     isDragging = false;
-    restartAutoScroll(); // Resume auto-scroll after interaction
+    restartAutoScroll(); // Resume auto-scroll
 });
 
-// Start auto-scroll once the document is fully loaded
+// Start auto-scroll after page loads
 document.addEventListener('DOMContentLoaded', () => {
     startAutoScroll();
 });
