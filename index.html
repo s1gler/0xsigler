@@ -135,6 +135,71 @@
 
     <!-- JavaScript for opening random windows -->
     <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.querySelector(".carousel");
+    let isPressing = false;
+    let startX = 0;
+    let currentScrollLeft = 0;
+    let holdTimer = null;
+
+    carousel.addEventListener("pointerdown", function (event) {
+        // Prevent default behavior
+        event.preventDefault();
+
+        isPressing = true;
+        startX = event.clientX;
+        currentScrollLeft = carousel.scrollLeft;
+
+        // Set a timer for press-and-hold
+        holdTimer = setTimeout(() => {
+            if (isPressing) {
+                const target = event.target.closest("img");
+                if (target) {
+                    target.style.transform = "scale(1.2)"; // Slightly enlarge
+                }
+            }
+        }, 500); // 500ms for press-and-hold
+    });
+
+    carousel.addEventListener("pointermove", function (event) {
+        if (!isPressing) return;
+
+    // Only prevent default if there's significant movement
+    if (Math.abs(event.clientX - startX) > 5) {
+        event.preventDefault();
+    }
+
+    const xDiff = event.clientX - startX;
+    carousel.scrollLeft = currentScrollLeft - xDiff;
+    });
+
+    carousel.addEventListener("pointerup", function (event) {
+        clearTimeout(holdTimer);
+        isPressing = false;
+
+        const target = event.target.closest("img");
+        if (target) {
+            // Reset image scale
+            target.style.transform = "scale(1)";
+        }
+    });
+
+    carousel.addEventListener("pointercancel", function () {
+        clearTimeout(holdTimer);
+        isPressing = false;
+
+        const images = carousel.querySelectorAll("img");
+        images.forEach((img) => (img.style.transform = "scale(1)")); // Reset all images
+    });
+
+    carousel.addEventListener("click", function (event) {
+        // Prevent the click event if it was a swipe or press-and-hold
+        if (isPressing) {
+            event.preventDefault();
+            isPressing = false;
+        }
+    });
+});
 
 // Smooth scroll to the "About" section with precise offset
 document.querySelector('.cta-button').addEventListener('click', function(event) {
@@ -187,7 +252,7 @@ function openRandomWindows() {
 
     // Function to open three random popups
     function openThreeRandomPopups() {
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 3; i++) {
             const randomImage = images[Math.floor(Math.random() * images.length)];
             openPopupWithUnload(randomImage);
         }
