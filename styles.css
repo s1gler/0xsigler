@@ -234,9 +234,12 @@ header {
     display: flex;
     white-space: nowrap;
     gap: 1rem;
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    scroll-behavior: smooth; /* Smooth scrolling */
-    -webkit-overflow-scrolling: touch; /* For better touch scrolling on iOS */
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    height: 250px; /* Set the height of the carousel */
+    align-items: center; /* Center images vertically */
+    padding: 1rem; /* Add some padding for better visual spacing */
 }
 .carousel::-webkit-scrollbar {
     display: none; /* Hide scrollbar for a cleaner look */
@@ -244,8 +247,8 @@ header {
 
 
 .carousel-container img {
-    width: 200px;
-    height: auto;
+    max-height: 200px; /* Limit the height of the images */
+    width: auto; /* Keep the aspect ratio intact */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
