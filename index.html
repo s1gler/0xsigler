@@ -137,88 +137,71 @@
     <script>
 document.addEventListener("DOMContentLoaded", function () {
     const carousel = document.querySelector(".carousel");
-    let isPressing = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    let autoScrollFrame;
+    let isInteracting = false; // Tracks if the user is interacting
+    let startX = 0; // Starting X position for swipe
+    let scrollLeft = 0; // Initial scroll position
+    let autoScrollInterval; // Interval for auto-scroll
 
-    // Auto-scroll function using requestAnimationFrame
+    // Auto-scroll function
     function startAutoScroll() {
-        function scrollStep() {
-            const scrollSpeed = 1; // Adjust the speed as needed
-            carousel.scrollLeft += scrollSpeed;
-
-            // Reset for infinite scroll
+        stopAutoScroll(); // Clear any existing interval
+        autoScrollInterval = setInterval(() => {
+            carousel.scrollLeft += 1; // Adjust scroll speed
             if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
                 carousel.scrollLeft = 0; // Loop back to the start
             }
-
-            autoScrollFrame = requestAnimationFrame(scrollStep);
-        }
-        autoScrollFrame = requestAnimationFrame(scrollStep);
+        }, 20); // Adjust for desired speed
     }
 
+    // Stop auto-scroll
     function stopAutoScroll() {
-        cancelAnimationFrame(autoScrollFrame);
+        clearInterval(autoScrollInterval);
     }
+
+    // Pointer down or touch start: Stop auto-scroll and prepare for manual interaction
+    function onStart(event) {
+        isInteracting = true;
+        startX = event.touches ? event.touches[0].clientX : event.clientX;
+        scrollLeft = carousel.scrollLeft;
+        stopAutoScroll();
+    }
+
+    // Pointer move or touch move: Allow manual scrolling
+    function onMove(event) {
+        if (!isInteracting) return;
+        const x = event.touches ? event.touches[0].clientX : event.clientX;
+        const walk = x - startX; // Distance moved
+        carousel.scrollLeft = scrollLeft - walk; // Scroll carousel
+    }
+
+    // Pointer up, touch end, or cancel: Resume auto-scroll
+    function onEnd() {
+        isInteracting = false;
+        startAutoScroll();
+    }
+
+    // Mouse enter: Stop auto-scroll (optional for hover behavior)
+    carousel.addEventListener("mouseenter", stopAutoScroll);
+
+    // Mouse leave: Resume auto-scroll
+    carousel.addEventListener("mouseleave", function () {
+        if (!isInteracting) startAutoScroll();
+    });
+
+    // Add event listeners for pointer (mouse) and touch interactions
+    carousel.addEventListener("pointerdown", onStart);
+    carousel.addEventListener("pointermove", onMove);
+    carousel.addEventListener("pointerup", onEnd);
+    carousel.addEventListener("pointercancel", onEnd);
+
+    // Add touch-specific events for mobile devices
+    carousel.addEventListener("touchstart", onStart);
+    carousel.addEventListener("touchmove", onMove);
+    carousel.addEventListener("touchend", onEnd);
 
     // Start auto-scroll on load
     startAutoScroll();
-
-    // Pointer down: prepare for manual interaction and stop auto-scroll
-    carousel.addEventListener("pointerdown", function (event) {
-        isPressing = true;
-        startX = event.clientX;
-        scrollLeft = carousel.scrollLeft;
-        stopAutoScroll();
-    });
-
-    // Pointer move: handle manual scrolling
-    carousel.addEventListener("pointermove", function (event) {
-        if (!isPressing) return;
-        const xDiff = event.clientX - startX;
-        carousel.scrollLeft = scrollLeft - xDiff;
-    });
-
-    // Pointer up or cancel: resume auto-scroll after interaction
-    carousel.addEventListener("pointerup", function () {
-        isPressing = false;
-        startAutoScroll();
-    });
-
-    carousel.addEventListener("pointercancel", function () {
-        isPressing = false;
-        startAutoScroll();
-    });
-
-    // Mouse enter: stop auto-scroll for desktop hover
-    carousel.addEventListener("mouseenter", stopAutoScroll);
-
-    // Mouse leave: resume auto-scroll for desktop hover
-    carousel.addEventListener("mouseleave", function () {
-        if (!isPressing) startAutoScroll();
-    });
-
-    // Touch handling for mobile
-    carousel.addEventListener("touchstart", function (event) {
-        isPressing = true;
-        startX = event.touches[0].clientX; // Use touches[0] for touch devices
-        scrollLeft = carousel.scrollLeft;
-        stopAutoScroll();
-    });
-
-    carousel.addEventListener("touchmove", function (event) {
-        if (!isPressing) return;
-        const xDiff = event.touches[0].clientX - startX;
-        carousel.scrollLeft = scrollLeft - xDiff;
-    });
-
-    carousel.addEventListener("touchend", function () {
-        isPressing = false;
-        startAutoScroll();
-    });
 });
-
     </script>
 
 </body>
