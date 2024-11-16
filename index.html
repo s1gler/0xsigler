@@ -201,10 +201,29 @@ carousel.addEventListener('touchend', () => {
     setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
 });
 
-// Start auto-scroll on page load
-document.addEventListener('DOMContentLoaded', startAutoScroll);
+// Prevent mobile touch from completely stopping auto-scroll
+carousel.addEventListener('touchcancel', () => {
+    isDragging = false;
+    setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
+});
 
-    </script>
+// Ensure auto-scroll works across all devices
+document.addEventListener('DOMContentLoaded', () => {
+    startAutoScroll();
 
+    // Detect when the user is interacting with the carousel and pause auto-scroll
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (!entry.isIntersecting) {
+                stopAutoScroll(); // Stop scrolling when the carousel is out of view
+            } else {
+                startAutoScroll(); // Restart scrolling when the carousel is back in view
+            }
+        },
+        { threshold: 0.5 }
+    );
+
+    observer.observe(carousel);
+});
 </body>
 </html>
