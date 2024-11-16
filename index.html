@@ -141,13 +141,15 @@ let startX;
 let scrollLeft;
 let autoScrollInterval;
 
-// Auto-scroll functionality
+// Function to start auto-scrolling
 function startAutoScroll() {
+    stopAutoScroll(); // Clear any previous intervals
     autoScrollInterval = setInterval(() => {
         carousel.scrollLeft += 1; // Adjust speed as needed
-    }, 20); // Adjust interval for smoother/faster scroll
+    }, 20); // Smooth, consistent scrolling speed
 }
 
+// Function to stop auto-scrolling
 function stopAutoScroll() {
     clearInterval(autoScrollInterval);
 }
@@ -157,28 +159,29 @@ carousel.addEventListener('mousedown', (e) => {
     isDragging = true;
     startX = e.pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
-    carousel.style.cursor = 'grabbing';
     stopAutoScroll(); // Pause auto-scroll on drag
+    carousel.style.cursor = 'grabbing';
 });
 
 carousel.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    e.preventDefault();
     const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust drag speed
+    const walk = (x - startX) * 2; // Adjust drag sensitivity
     carousel.scrollLeft = scrollLeft - walk;
 });
 
 carousel.addEventListener('mouseup', () => {
     isDragging = false;
-    carousel.style.cursor = 'grab';
     setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
+    carousel.style.cursor = 'grab';
 });
 
 carousel.addEventListener('mouseleave', () => {
-    isDragging = false;
+    if (isDragging) {
+        isDragging = false;
+        setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
+    }
     carousel.style.cursor = 'grab';
-    setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
 });
 
 // Touch events for mobile
@@ -192,7 +195,7 @@ carousel.addEventListener('touchstart', (e) => {
 carousel.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
     const x = e.touches[0].pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust swipe speed
+    const walk = (x - startX) * 2; // Adjust swipe sensitivity
     carousel.scrollLeft = scrollLeft - walk;
 });
 
@@ -201,29 +204,14 @@ carousel.addEventListener('touchend', () => {
     setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
 });
 
-// Prevent mobile touch from completely stopping auto-scroll
 carousel.addEventListener('touchcancel', () => {
     isDragging = false;
     setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
 });
 
-// Ensure auto-scroll works across all devices
+// Start auto-scrolling once the document is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     startAutoScroll();
-
-    // Detect when the user is interacting with the carousel and pause auto-scroll
-    const observer = new IntersectionObserver(
-        ([entry]) => {
-            if (!entry.isIntersecting) {
-                stopAutoScroll(); // Stop scrolling when the carousel is out of view
-            } else {
-                startAutoScroll(); // Restart scrolling when the carousel is back in view
-            }
-        },
-        { threshold: 0.5 }
-    );
-
-    observer.observe(carousel);
 });
 
     </script>
