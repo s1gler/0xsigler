@@ -86,34 +86,34 @@
     </section>
 
     <!-- Image Carousel Section -->
-    <section class="image-carousel">
-        <div class="carousel">
-            <img src="images2/06cc6fa2b7b50468e21eb2577ecf0e06.webp">
-            <img src="images2/1b5784b0453b051d3a8a1cde253da5fa.avif">
-            <img src="images2/27fd6591a626e938b7f92dd77f1e0bd2.avif">
-            <img src="images2/30fec8f78a02c3f9317b48adc90eeeab.webp">
-            <img src="images2/28dc111213ca371abcae044882f80cc8.png">
-            <img src="images2/94f3e744a787259cdccaf758a57517ae.webp">
-            <img src="images2/f24b6cbed658fc6995167cdbf8965c29.png">
-            <img src="images2/118e243fd8666c705fa9aa47efd9cd09.webp">
-            <img src="images2/c1c4f66d45f0f6fc2e9396804e748260.avif">
+    <section class="scrolling-carousel">
+        <div class="carousel-container">
+            <img src="images2/06cc6fa2b7b50468e21eb2577ecf0e06.webp" alt="Item 1">
+            <img src="images2/1b5784b0453b051d3a8a1cde253da5fa.avif" alt="Item 2">
+            <img src="images2/27fd6591a626e938b7f92dd77f1e0bd2.avif" alt="Item 3">
+            <img src="images2/30fec8f78a02c3f9317b48adc90eeeab.webp" alt="Item 4">
+            <img src="images2/28dc111213ca371abcae044882f80cc8.png" alt="Item 5">
+            <img src="images2/94f3e744a787259cdccaf758a57517ae.webp" alt="Item 6">
+            <img src="images2/f24b6cbed658fc6995167cdbf8965c29.png" alt="Item 7">
+            <img src="images2/118e243fd8666c705fa9aa47efd9cd09.webp" alt="Item 8">
+            <img src="images2/c1c4f66d45f0f6fc2e9396804e748260.avif" alt="Item 9">
             <a href="https://app.manifold.xyz/br/BurnPupz" target="_blank">
-                <img src="images2/471e7f960b02247efdf9c9991bc3f838.webp" alt="Special Clickable Image">
+                <img src="images2/471e7f960b02247efdf9c9991bc3f838.webp" alt="Special Clickable Image (Item 10)">
             </a>
-            <img src="images2/7390b05e9fec3e7361dc5f95577c8a16.avif">
-            <img src="images2/adc24bf8bea16982652f0ac91bfbc51d.webp">
-            <img src="images2/1169694a8dffe7a3637ff377268402aa.png">
-            <img src="images2/18719973f33f90775fac5c094904694e.webp">
-            <img src="images2/a0a6d04b2be7ce8087a589593dba52f0.avif">
-            <img src="images2/a33fbd323bdb7396cbb36ce0a6dec947.webp">
-            <img src="images2/a41dc56817e86679eaa7d13a439520cf.webp">
-            <img src="images2/a95e9303608b5e6c2c3e04aa2db4f212.png">
-            <img src="images2/ae932d175a179472cf733fa31f6ca527.avif">
-            <img src="images2/b08443d1ab3c3e090eab55fb356f1a6d.avif">
-            <img src="images2/bbe59733e18bb2f298ae2d78436d663a.avif">
-            <img src="images2/c40a1a6d1a32c4a1b7cd246d35794114.webp">
-            <img src="images2/830cf5696237482d2af06d56f33639ec.webp">
-            <img src="images2/79781f2612427aba2337ce3dfaeeb6b5.avif">
+            <img src="images2/7390b05e9fec3e7361dc5f95577c8a16.avif" alt="Item 11">
+            <img src="images2/adc24bf8bea16982652f0ac91bfbc51d.webp" alt="Item 12">
+            <img src="images2/1169694a8dffe7a3637ff377268402aa.png" alt="Item 13">
+            <img src="images2/18719973f33f90775fac5c094904694e.webp" alt="Item 14">
+            <img src="images2/a0a6d04b2be7ce8087a589593dba52f0.avif" alt="Item 15">
+            <img src="images2/a33fbd323bdb7396cbb36ce0a6dec947.webp" alt="Item 16">
+            <img src="images2/a41dc56817e86679eaa7d13a439520cf.webp" alt="Item 17">
+            <img src="images2/a95e9303608b5e6c2c3e04aa2db4f212.png" alt="Item 18">
+            <img src="images2/ae932d175a179472cf733fa31f6ca527.avif" alt="Item 19">
+            <img src="images2/b08443d1ab3c3e090eab55fb356f1a6d.avif" alt="Item 20">
+            <img src="images2/bbe59733e18bb2f298ae2d78436d663a.avif" alt="Item 21">
+            <img src="images2/c40a1a6d1a32c4a1b7cd246d35794114.webp" alt="Item 22">
+            <img src="images2/830cf5696237482d2af06d56f33639ec.webp" alt="Item 23">
+            <img src="images2/79781f2612427aba2337ce3dfaeeb6b5.avif" alt="Item 24">
         </div>
     </section>
 
@@ -135,68 +135,56 @@
 
     <!-- JavaScript for opening random windows -->
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const carousel = document.querySelector(".carousel");
-    let isDragging = false; // Whether the user is currently dragging
-    let startX = 0; // Start X coordinate
-    let scrollLeft = 0; // Scroll position at drag start
-    let autoScrollInterval; // Interval for auto-scroll
+const carousel = document.querySelector('.scrolling-carousel');
 
-    // Auto-scroll function
-    function startAutoScroll() {
-        stopAutoScroll(); // Clear any existing auto-scroll
-        autoScrollInterval = setInterval(() => {
-            carousel.scrollLeft += 1; // Adjust speed
-            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
-                carousel.scrollLeft = 0; // Loop to the beginning
-            }
-        }, 20); // Adjust interval for smoothness
-    }
+let isDragging = false;
+let startX;
+let scrollLeft;
 
-    // Stop auto-scroll function
-    function stopAutoScroll() {
-        clearInterval(autoScrollInterval);
-    }
-
-    // Start dragging/swiping
-    function onStart(event) {
-        isDragging = true;
-        startX = event.touches ? event.touches[0].clientX : event.clientX; // Touch or mouse position
-        scrollLeft = carousel.scrollLeft;
-        stopAutoScroll(); // Stop auto-scroll during manual interaction
-    }
-
-    // Drag/swipe to scroll
-    function onMove(event) {
-        if (!isDragging) return;
-        const x = event.touches ? event.touches[0].clientX : event.clientX;
-        const walk = (x - startX) * 1.5; // Adjust sensitivity with multiplier
-        carousel.scrollLeft = scrollLeft - walk; // Adjust scroll position
-    }
-
-    // Stop dragging/swiping
-    function onEnd() {
-        isDragging = false;
-        startAutoScroll(); // Resume auto-scroll
-    }
-
-    // Add event listeners for both desktop and mobile
-    carousel.addEventListener("pointerdown", onStart);
-    carousel.addEventListener("pointermove", onMove);
-    carousel.addEventListener("pointerup", onEnd);
-    carousel.addEventListener("pointerleave", onEnd);
-    carousel.addEventListener("pointercancel", onEnd);
-
-    carousel.addEventListener("touchstart", onStart);
-    carousel.addEventListener("touchmove", onMove);
-    carousel.addEventListener("touchend", onEnd);
-
-    // Prevent text selection during drag
-    carousel.addEventListener("dragstart", (e) => e.preventDefault());
-
-    // Start auto-scroll on page load
-    startAutoScroll();
+// Mouse events for desktop
+carousel.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+    carousel.style.cursor = 'grabbing';
 });
+
+carousel.addEventListener('mouseleave', () => {
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+});
+
+carousel.addEventListener('mouseup', () => {
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+});
+
+carousel.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust scroll speed
+    carousel.scrollLeft = scrollLeft - walk;
+});
+
+// Touch events for mobile
+carousel.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+});
+
+carousel.addEventListener('touchend', () => {
+    isDragging = false;
+});
+
+carousel.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust scroll speed
+    carousel.scrollLeft = scrollLeft - walk;
+});
+
     </script>
 
 </body>

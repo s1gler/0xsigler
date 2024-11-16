@@ -230,8 +230,9 @@ header {
     padding: 1rem 0;
 }
 
-.carousel {
+.scrolling-carousel {
     display: flex;
+    white-space: nowrap;
     gap: 1rem;
     overflow-x: scroll; /* Enable horizontal scrolling */
     scroll-behavior: smooth; /* Smooth scrolling */
@@ -242,13 +243,14 @@ header {
 }
 
 
-.carousel img {
+.carousel-container img {
     width: 200px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
     will-change: transform;
+    cursor: grab;
 }
 
 @media (max-width: 768px) {
