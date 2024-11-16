@@ -136,10 +136,21 @@
     <!-- JavaScript for opening random windows -->
     <script>
 const carousel = document.querySelector('.scrolling-carousel');
-
 let isDragging = false;
 let startX;
 let scrollLeft;
+let autoScrollInterval;
+
+// Auto-scroll functionality
+function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+        carousel.scrollLeft += 1; // Adjust speed as needed
+    }, 20); // Adjust interval for smoother/faster scroll
+}
+
+function stopAutoScroll() {
+    clearInterval(autoScrollInterval);
+}
 
 // Mouse events for desktop
 carousel.addEventListener('mousedown', (e) => {
@@ -147,24 +158,27 @@ carousel.addEventListener('mousedown', (e) => {
     startX = e.pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
     carousel.style.cursor = 'grabbing';
-});
-
-carousel.addEventListener('mouseleave', () => {
-    isDragging = false;
-    carousel.style.cursor = 'grab';
-});
-
-carousel.addEventListener('mouseup', () => {
-    isDragging = false;
-    carousel.style.cursor = 'grab';
+    stopAutoScroll(); // Pause auto-scroll on drag
 });
 
 carousel.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust scroll speed
+    const walk = (x - startX) * 2; // Adjust drag speed
     carousel.scrollLeft = scrollLeft - walk;
+});
+
+carousel.addEventListener('mouseup', () => {
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+    setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
+});
+
+carousel.addEventListener('mouseleave', () => {
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+    setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
 });
 
 // Touch events for mobile
@@ -172,18 +186,23 @@ carousel.addEventListener('touchstart', (e) => {
     isDragging = true;
     startX = e.touches[0].pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
-});
-
-carousel.addEventListener('touchend', () => {
-    isDragging = false;
+    stopAutoScroll(); // Pause auto-scroll on touch
 });
 
 carousel.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
     const x = e.touches[0].pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust scroll speed
+    const walk = (x - startX) * 2; // Adjust swipe speed
     carousel.scrollLeft = scrollLeft - walk;
 });
+
+carousel.addEventListener('touchend', () => {
+    isDragging = false;
+    setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
+});
+
+// Start auto-scroll on page load
+document.addEventListener('DOMContentLoaded', startAutoScroll);
 
     </script>
 
