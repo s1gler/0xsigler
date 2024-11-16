@@ -137,9 +137,9 @@
     <script>
 document.addEventListener("DOMContentLoaded", function () {
     const carousel = document.querySelector(".carousel");
-    let isInteracting = false; // Tracks if the user is interacting
-    let startX = 0; // Starting X position for swipe
-    let scrollLeft = 0; // Initial scroll position
+    let isDragging = false; // Track if the user is dragging
+    let startX = 0; // Starting X position for drag/swipe
+    let scrollLeft = 0; // Starting scroll position
     let autoScrollInterval; // Interval for auto-scroll
 
     // Auto-scroll function
@@ -148,56 +148,51 @@ document.addEventListener("DOMContentLoaded", function () {
         autoScrollInterval = setInterval(() => {
             carousel.scrollLeft += 1; // Adjust scroll speed
             if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
-                carousel.scrollLeft = 0; // Loop back to the start
+                carousel.scrollLeft = 0; // Loop to the start
             }
-        }, 20); // Adjust for desired speed
+        }, 20); // Adjust interval for desired speed
     }
 
-    // Stop auto-scroll
+    // Stop auto-scroll function
     function stopAutoScroll() {
         clearInterval(autoScrollInterval);
     }
 
-    // Pointer down or touch start: Stop auto-scroll and prepare for manual interaction
+    // Pointer down / touch start: Prepare for interaction
     function onStart(event) {
-        isInteracting = true;
+        isDragging = true;
         startX = event.touches ? event.touches[0].clientX : event.clientX;
         scrollLeft = carousel.scrollLeft;
-        stopAutoScroll();
+        stopAutoScroll(); // Stop auto-scroll during interaction
     }
 
-    // Pointer move or touch move: Allow manual scrolling
+    // Pointer move / touch move: Adjust scroll position
     function onMove(event) {
-        if (!isInteracting) return;
+        if (!isDragging) return;
         const x = event.touches ? event.touches[0].clientX : event.clientX;
-        const walk = x - startX; // Distance moved
-        carousel.scrollLeft = scrollLeft - walk; // Scroll carousel
+        const walk = (x - startX) * 1.5; // Multiplier for sensitivity
+        carousel.scrollLeft = scrollLeft - walk; // Adjust scroll position
     }
 
-    // Pointer up, touch end, or cancel: Resume auto-scroll
+    // Pointer up / touch end / pointer cancel: End interaction
     function onEnd() {
-        isInteracting = false;
-        startAutoScroll();
+        isDragging = false;
+        startAutoScroll(); // Resume auto-scroll after interaction
     }
 
-    // Mouse enter: Stop auto-scroll (optional for hover behavior)
-    carousel.addEventListener("mouseenter", stopAutoScroll);
-
-    // Mouse leave: Resume auto-scroll
-    carousel.addEventListener("mouseleave", function () {
-        if (!isInteracting) startAutoScroll();
-    });
-
-    // Add event listeners for pointer (mouse) and touch interactions
+    // Desktop-specific interaction: Click + hold + drag
     carousel.addEventListener("pointerdown", onStart);
     carousel.addEventListener("pointermove", onMove);
     carousel.addEventListener("pointerup", onEnd);
     carousel.addEventListener("pointercancel", onEnd);
 
-    // Add touch-specific events for mobile devices
+    // Mobile-specific interaction: Swiping
     carousel.addEventListener("touchstart", onStart);
     carousel.addEventListener("touchmove", onMove);
     carousel.addEventListener("touchend", onEnd);
+
+    // Prevent text selection on drag
+    carousel.addEventListener("dragstart", (e) => e.preventDefault());
 
     // Start auto-scroll on load
     startAutoScroll();
