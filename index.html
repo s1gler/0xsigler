@@ -140,22 +140,32 @@ document.addEventListener("DOMContentLoaded", function () {
     let isPressing = false;
     let startX = 0;
     let scrollLeft = 0;
-    let autoScrollInterval;
+    let autoScrollFrame;
 
-    // Auto-scroll function
+    // Auto-scroll function using requestAnimationFrame
     function startAutoScroll() {
-        autoScrollInterval = setInterval(() => {
-            carousel.scrollLeft += 1; // Adjust the speed as needed
-        }, 20); // Adjust the interval for smoother/faster scroll
+        function scrollStep() {
+            const scrollSpeed = carousel.offsetWidth / 100; // Dynamic speed based on carousel width
+            carousel.scrollLeft += scrollSpeed;
+
+            // Check if we need to reset for infinite scrolling
+            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
+                carousel.scrollLeft = 0; // Loop back to the start
+            }
+
+            autoScrollFrame = requestAnimationFrame(scrollStep);
+        }
+        autoScrollFrame = requestAnimationFrame(scrollStep);
     }
 
     function stopAutoScroll() {
-        clearInterval(autoScrollInterval);
+        cancelAnimationFrame(autoScrollFrame);
     }
 
     // Start auto-scroll on load
     startAutoScroll();
 
+    // Pointer down: stop auto-scroll and prepare for manual swipe
     carousel.addEventListener("pointerdown", function (event) {
         isPressing = true;
         startX = event.clientX;
@@ -163,13 +173,20 @@ document.addEventListener("DOMContentLoaded", function () {
         stopAutoScroll(); // Stop auto-scroll on touch
     });
 
+    // Pointer move: handle manual scrolling
     carousel.addEventListener("pointermove", function (event) {
         if (!isPressing) return;
-        event.preventDefault();
+
         const xDiff = event.clientX - startX;
-        carousel.scrollLeft = scrollLeft - xDiff; // Scroll manually based on swipe
+
+        // Add threshold to avoid accidental scroll
+        if (Math.abs(xDiff) < 5) return;
+
+        event.preventDefault(); // Prevent default only for significant horizontal swipes
+        carousel.scrollLeft = scrollLeft - xDiff;
     });
 
+    // Pointer up or cancel: resume auto-scroll
     carousel.addEventListener("pointerup", function () {
         isPressing = false;
         startAutoScroll(); // Resume auto-scroll on release
@@ -180,20 +197,20 @@ document.addEventListener("DOMContentLoaded", function () {
         startAutoScroll(); // Resume auto-scroll on cancel
     });
 
-    // Stop auto-scroll on pointerenter (optional for desktop users)
+    // Stop auto-scroll when pointer enters (optional for desktop users)
     carousel.addEventListener("pointerenter", stopAutoScroll);
     carousel.addEventListener("pointerleave", startAutoScroll);
 });
 
 // Smooth scroll to the "About" section with precise offset
-document.querySelector('.cta-button').addEventListener('click', function(event) {
+document.querySelector('.cta-button').addEventListener('click', function (event) {
     event.preventDefault();
-    
+
     const aboutSection = document.getElementById('about');
-    
+
     // Calculate the precise offset using the element's position in the viewport
     const sectionTop = aboutSection.getBoundingClientRect().top + window.pageYOffset;
-    
+
     const offset = sectionTop - 69; // Adjust the 80px offset as needed for better positioning
 
     window.scrollTo({ top: offset, behavior: 'smooth' });
@@ -201,34 +218,22 @@ document.querySelector('.cta-button').addEventListener('click', function(event) 
 
 // Define openRandomWindows function globally
 function openRandomWindows() {
-    const images = ["images/Wrk-za04O5rbZkhBkgaaYPRA_Jn7I8h43I4viLa54h9wEgYwppSlhCeg_vbQg87vfRYlrMvtzp3-_VSN52J2peEzTPjiv7IhksOFIto.avif",
-                "images/WgtWl8qYtAHAY26z6r43MUYkPCw0JNbkXgKfw9zVVgnSOQh6XbuPORFHHB3nNoOAepQbrDR22qQGR-qXE0gFz7VwtVyl4lpt2pLK.avif",
-                "images/QPpKzGq-8SLWckfOuHpUzduNDgwFSOxK1aHQ6uYuVaa1GAW_U9KOojHkqOITA_kznsx5nDWtdzCnXA3xpKU_cqTtqzvb8LI5OafajA.avif",
-                "images/oQl4H1Hx8bLslxVqXanQBn20AchJzXRJeyjeafu7kN4q4Mpf4WwG5OcLlrDAieIexYoooKLgzP6qBtgeqO-k0OrhoeMU_qu9CGdUag.avif",
-                "images/nQnv5jq-PsZ6TLqlqpABruteIV2X5uF9i_pkm-HhT1Px7tO_byFypC4717WWTn--P46Ly_js3xkD4JuOwKdHsAy1_QB6F95NQGE19VU.avif",
-                "images/LSHQ01BHSFr5u-pWIY0K0JtLNeZvI6ux5uoacFrMSmDrL1qvUzZUSb4AWIUlDmZwFRt899UMP7CYcuCZ30KtqBBRxY1kl7L8rT3x7A.avif",
-                "images/k8GVaIK5zY8kGSqRtdFinL80B3rQE8TnfjpBKQj_AJZZPTaJa6ogKvwsAaNe8E6Yh3dRJU-i9X_v6EDrBzE1E46DEzgifldz5AN0Kw.avif",
-                "images/k1xDQF25u9G75lwq2jLtPvfVeAKrVgBL6k6GlzjoMc9kq-SraKtd70QPTVKFPHEf6pXlLQfc2MP95y56-KzqKDzt4fTpzj_PGLPs.avif",
-                "images/flALkCybXML5Y_wEbmzTtHxaaexbexLz01Kx2H2TzOBOtOGQWMRGdlC1kr3afByLeQs4xDjD64bobLE6YcE8yZQ1fym3IXxJwaQs4A.avif",
-                "images/d5djSBhUzDG8NNdGRRxStbvJd-W4f351b6W_4BB4aXVBTGAAFEnB2zHducRTN3wcTqPEnyk0das4_1v4UrSHQaADH6jHu_5a-USPhw.avif",
-                "images/C1KhV-1RX5dQ0hHBTMLhH56850rVoFIvZ6C8ObkZhfqrcIhvV7y41QdhgVB42CDZXXmhGs-_hHitgusHw6Hv7Yk6w3AwCHVjET0hGw.avif",
-                "images/bTLtkFiQWy5LJOAD2b1nbv5616ZgJu9NqMVS_REJ3sTKgGneKC1osTYNZ5FZVswaWeJdUMNmYEwLIQM3u8s_4MWpYrTR5ARSXXws9Q.avif",
-                "images/b9X5VNqRyR8CZNXvxj_i8DMd2CffP637Sb9DWlBD3Sgli3T0De2vdoofjSatq9LAD1RHUJvhFpyiyG3VfEFoXEYoBe-H4yrpb1E4bA.avif",
-                "images/57KWiUuTP8S6Z6lm09SLlE155qKZoBVTu8w4RHuLlEExM9SwnEfvp27xRmZJDdaOBb4THdFmFXfENflgUTbO8H73KzSvtbZxEjW-0A.avif",
-                "images/6nKDzM-GO7Paui2-hTJIxbyuU1DwsGqslGm7MJsqNJbVE9FYrvSLDjKEi95f17Ef616xk7enHoEqE5ITc8Hq41BIE0MfMnuz64iYsg.avif",
-                "images/1APvj5wzWrazdZaGhw5DdZjsC7sE2-f3R3frDxDG65zds1moDgxA-J9T_a2j4xVgZ7IQiRbDsb4THOZNh8W3INr24n9jNobeq7qgX60.avif",
-                "images/0vPkEf97FXOmO5RH53ICVxQkf5CB4ps9AVtBDrT08JP8VoATBOBGjDclZI2182nZgXodu-yTFk38Ku85ywaIdOtGnaeZgNh9nMYKF4s.avif",
-                "images/xF6eNt_i7oHXnRN0JHUfUuG05v90NJ6lhLXZFg-6Q3BCqy4ZiZKPsv9hY3GN5YszJGIoQG2bcoIx7HbK3E2ERtjZuKPEK5itv8FpvQ.avif",
-                "images/uU_XVD4y8aWJnNJjynm-YTcQZVJS9AdUVX7TJn68Gs353Xtt_AC8didXL-F9pTvsufn6lHby0w82_-v2jwG1WhffZwi9B5CDnrbYMg.avif"];
+    const images = [
+        "images/Wrk-za04O5rbZkhBkgaaYPRA_Jn7I8h43I4viLa54h9wEgYwppSlhCeg_vbQg87vfRYlrMvtzp3-_VSN52J2peEzTPjiv7IhksOFIto.avif",
+        "images/WgtWl8qYtAHAY26z6r43MUYkPCw0JNbkXgKfw9zVVgnSOQh6XbuPORFHHB3nNoOAepQbrDR22qQGR-qXE0gFz7VwtVyl4lpt2pLK.avif",
+        "images/QPpKzGq-8SLWckfOuHpUzduNDgwFSOxK1aHQ6uYuVaa1GAW_U9KOojHkqOITA_kznsx5nDWtdzCnXA3xpKU_cqTtqzvb8LI5OafajA.avif",
+        "images/oQl4H1Hx8bLslxVqXanQBn20AchJzXRJeyjeafu7kN4q4Mpf4W5OcLlrDAieIexYoooKLgzP6qBtgeqO-k0OrhoeMU_qu9CGdUag.avif",
+        // Add all other image paths
+    ];
 
     // Function to open a single popup with a random image
     function openPopupWithUnload(image) {
         const randomTop = Math.floor(Math.random() * (window.innerHeight - 400));
         const randomLeft = Math.floor(Math.random() * (window.innerWidth - 400));
         const popup = window.open(image, '_blank', `width=400,height=400,top=${randomTop},left=${randomLeft}`);
-        
+
         if (popup) {
-            popup.onbeforeunload = function() {
+            popup.onbeforeunload = function () {
                 openThreeRandomPopups();
             };
         }
@@ -255,24 +260,23 @@ function openRandomWindows() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");
     const navLinksList = document.querySelectorAll(".nav-links a");
 
     // Toggle menu visibility when clicking the menu icon
-    menuToggle.addEventListener("click", function() {
+    menuToggle.addEventListener("click", function () {
         navLinks.classList.toggle("active");
     });
 
     // Close the menu when clicking any link inside the menu
     navLinksList.forEach(link => {
-        link.addEventListener("click", function() {
+        link.addEventListener("click", function () {
             navLinks.classList.remove("active");
         });
-                
-            });
-        });
+    });
+});
     </script>
 
 </body>
