@@ -224,6 +224,92 @@ carousel.addEventListener('touchcancel', () => {
 document.addEventListener('DOMContentLoaded', () => {
     autoScroll(); // Begin auto-scroll on page load
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector('.scrolling-carousel');
+
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+    let autoScrollID;
+
+    function autoScroll() {
+        autoScrollID = requestAnimationFrame(() => {
+            carousel.scrollLeft += 1; // Adjust speed
+            autoScroll();
+        });
+    }
+
+    function stopAutoScroll() {
+        cancelAnimationFrame(autoScrollID);
+    }
+
+    function restartAutoScroll() {
+        stopAutoScroll();
+        setTimeout(() => {
+            autoScroll();
+        }, 2000);
+    }
+
+    // Interaction handlers remain the same
+    carousel.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+        stopAutoScroll();
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const x = e.pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 2;
+        carousel.scrollLeft = scrollLeft - walk;
+    });
+
+    carousel.addEventListener('mouseup', () => {
+        isDragging = false;
+        restartAutoScroll();
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+            isDragging = false;
+            restartAutoScroll();
+        }
+    });
+
+    carousel.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+        stopAutoScroll();
+    });
+
+    carousel.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 2;
+        carousel.scrollLeft = scrollLeft - walk;
+    });
+
+    carousel.addEventListener('touchend', () => {
+        isDragging = false;
+        restartAutoScroll();
+    });
+
+    autoScroll(); // Start auto-scroll on page load
+});
+
+
     </script>
 
 </body>
