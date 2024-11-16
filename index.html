@@ -135,19 +135,34 @@
 
     <!-- JavaScript for opening random windows -->
     <script>
-const carousel = document.querySelector('.carousel');
+const carousel = document.querySelector('.scrolling-carousel');
 let isDragging = false;
 let startX;
 let scrollLeft;
+let autoScrollID;
 
-// Pause animation during interaction
-function pauseAutoScroll() {
-    carousel.classList.add('paused');
+// Auto-scroll function using requestAnimationFrame
+function autoScroll() {
+    autoScrollID = requestAnimationFrame(() => {
+        carousel.scrollLeft += 1; // Adjust speed if needed
+        autoScroll(); // Keep auto-scrolling
+    });
 }
 
-// Resume animation after interaction
-function resumeAutoScroll() {
-    carousel.classList.remove('paused');
+// Stop auto-scroll
+function stopAutoScroll() {
+    if (autoScrollID) {
+        cancelAnimationFrame(autoScrollID);
+        autoScrollID = null;
+    }
+}
+
+// Restart auto-scroll after interaction
+function restartAutoScroll() {
+    stopAutoScroll();
+    setTimeout(() => {
+        autoScroll(); // Resume after a short delay
+    }, 2000);
 }
 
 // Mouse events for desktop
@@ -155,26 +170,29 @@ carousel.addEventListener('mousedown', (e) => {
     isDragging = true;
     startX = e.pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
-    pauseAutoScroll();
+    stopAutoScroll(); // Pause auto-scroll on interaction
+    carousel.style.cursor = 'grabbing';
 });
 
 carousel.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust sensitivity
+    const walk = (x - startX) * 2; // Adjust drag sensitivity
     carousel.scrollLeft = scrollLeft - walk;
 });
 
 carousel.addEventListener('mouseup', () => {
     isDragging = false;
-    resumeAutoScroll();
+    carousel.style.cursor = 'grab';
+    restartAutoScroll(); // Restart auto-scroll after interaction
 });
 
 carousel.addEventListener('mouseleave', () => {
     if (isDragging) {
         isDragging = false;
-        resumeAutoScroll();
+        restartAutoScroll(); // Restart auto-scroll after leaving
     }
+    carousel.style.cursor = 'grab';
 });
 
 // Touch events for mobile
@@ -182,26 +200,30 @@ carousel.addEventListener('touchstart', (e) => {
     isDragging = true;
     startX = e.touches[0].pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
-    pauseAutoScroll();
+    stopAutoScroll(); // Pause auto-scroll during touch interaction
 });
 
 carousel.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
     const x = e.touches[0].pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust sensitivity
+    const walk = (x - startX) * 2; // Adjust swipe sensitivity
     carousel.scrollLeft = scrollLeft - walk;
 });
 
 carousel.addEventListener('touchend', () => {
     isDragging = false;
-    resumeAutoScroll();
+    restartAutoScroll(); // Restart auto-scroll after touch interaction
 });
 
 carousel.addEventListener('touchcancel', () => {
     isDragging = false;
-    resumeAutoScroll();
+    restartAutoScroll(); // Restart auto-scroll after touch cancel
 });
 
+// Start auto-scroll after DOM loads
+document.addEventListener('DOMContentLoaded', () => {
+    autoScroll(); // Begin auto-scroll on page load
+});
     </script>
 
 </body>
