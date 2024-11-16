@@ -235,13 +235,23 @@ header {
     gap: 1rem;
     animation: scroll 60s linear infinite;
     width: calc(200px * 20 + 1rem * 20);
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    height: 250px;
+    align-items: center;
+    padding: 1rem;
 }
 
 .carousel img {
-    width: 200px;
-    height: auto;
+    max-height: 200px;
+    width: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    will-change: transform;
+    cursor: grab;
+
 }
 
 @keyframes scroll {
