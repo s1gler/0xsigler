@@ -37,7 +37,6 @@ header {
     align-items: center;
 }
 
-/* Navigation Links */
 .nav-links {
     list-style: none;
     display: flex;
@@ -46,10 +45,9 @@ header {
     transition: max-height 0.3s ease-in-out;
 }
 
-/* Mobile-specific styling to hide menu initially */
 @media (max-width: 768px) {
     .nav-links {
-        max-height: 0; /* Hidden by default on mobile */
+        max-height: 0;
         flex-direction: column;
         position: absolute;
         top: 100%;
@@ -59,7 +57,7 @@ header {
     }
 
     .nav-links.active {
-        max-height: 200px; /* Set a max height when menu is open */
+        max-height: 200px;
     }
 
     .menu-toggle {
@@ -67,20 +65,19 @@ header {
     }
 }
 
-/* Ensure menu is always visible on desktop */
 @media (min-width: 769px) {
     .nav-links {
         display: flex;
-        max-height: none; /* Prevents max-height restriction on desktop */
+        max-height: none;
     }
 
     .menu-toggle {
-        display: none; /* Hide the menu toggle button on desktop */
+        display: none;
     }
 }
 
 .nav-links.active {
-    max-height: 200px; /* Set a max height when menu is open */
+    max-height: 200px;
 }
 
 .nav-links li {
@@ -145,30 +142,26 @@ header {
 .cta-button:hover {
     background-color: #3a9acc;
 }
+
+/* About Section */
 #about {
-    max-width: 800px; /* Limit width to improve readability */
-    margin: 0 auto; /* Center-align the section */
-    padding: 150px 2rem 0; /* Top padding for spacing; horizontal padding for spacing */
-    text-align: center; /* Center the text */
-    padding-bottom: 0; /* Remove extra padding at the bottom */
-    margin-bottom: 0; /* Remove any extra margin at the bottom */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 150px 2rem 0;
+    text-align: center;
 }
+
+/* Services Section */
 .services h2 {
-    margin-bottom: 5rem; /* Additional space between heading and cards */
+    margin-bottom: 5rem;
 }
+
 .services {
-    padding-bottom: 6rem; /* Increased space below the entire services section */
+    padding-bottom: 6rem;
 }
 
 .service-cards {
-    margin-bottom: 4rem; /* Increased space below the cards */
-}
-
-
-/* About, Services, and Contact Sections */
-.about, .services, .contact {
-    padding: 4rem 2rem;
-    text-align: center;
+    margin-bottom: 4rem;
 }
 
 .services .service-cards {
@@ -178,16 +171,14 @@ header {
     flex-wrap: wrap;
 }
 
-/* Service Card Links */
 .service-card-link {
-    text-decoration: none; /* Remove underline from links */
-    color: inherit; /* Inherit color from parent */
+    text-decoration: none;
+    color: inherit;
     display: inline-block;
-    width: 300px; /* Consistent width for each card */
+    width: 300px;
     transition: transform 0.3s ease;
 }
 
-/* Individual Service Card Styling */
 .service-card {
     background: #fff;
     padding: 2rem;
@@ -201,71 +192,54 @@ header {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Hover Effect for Service Card */
 .service-card-link:hover .service-card {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Service Card Headings */
 .service-card h3 {
-    font-family: 'Superscratchy', sans-serif; /* Use 'Superscratchy' as the custom font name */
+    font-family: 'Superscratchy', sans-serif;
     font-weight: bold;
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: #333; /* Adjust color as needed */
+    color: #333;
 }
 
-/* Service Card Paragraph Text */
 .service-card p {
     font-size: 1rem;
     color: #666;
 }
 
 /* Image Carousel Section */
-.image-carousel {
+.scrolling-carousel {
     overflow: hidden;
     width: 100%;
     background-color: #f8f9fa;
     padding: 1rem 0;
 }
 
-.scrolling-carousel {
+.carousel {
     display: flex;
-    white-space: nowrap;
     gap: 1rem;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    height: 250px; /* Set the height of the carousel */
-    align-items: center; /* Center images vertically */
-    padding: 1rem; /* Add some padding for better visual spacing */
-    position: relative; /* For precise control */
-}
-.carousel::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for a cleaner look */
+    animation: scroll 60s linear infinite;
+    width: calc(200px * 20 + 1rem * 20);
 }
 
+.carousel.paused {
+    animation-play-state: paused;
+}
 
-.carousel-container img {
-    max-height: 200px; /* Limit the height of the images */
-    width: auto; /* Keep the aspect ratio intact */
+.carousel img {
+    max-height: 200px;
+    width: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-    will-change: transform;
     cursor: grab;
 }
 
-/* Mobile-specific adjustments */
 @media (max-width: 768px) {
-    .scrolling-carousel {
-        height: 220px; /* Adjust carousel height for smaller screens */
-        padding: 0.5rem; /* Adjust padding for mobile spacing */
-    }
-
-    .carousel-container img {
-        max-height: 150px; /* Smaller images for mobile */
+    .carousel img {
+        max-height: 150px;
     }
 }
 
@@ -275,19 +249,6 @@ header {
     }
     to {
         transform: translateX(-50%);
-    }
-}
-/* Resize "Stuff" section cards for mobile */
-@media (max-width: 768px) {
-    .service-cards {
-        flex-direction: column; /* Stack the cards vertically */
-        align-items: center; /* Center-align the cards */
-        margin: 0 auto; /* Center the entire service-cards container */
-    }
-
-    .service-card-link {
-        width: 100%; /* Allow cards to take up most of the screen width on mobile */
-        max-width: 400px; /* Set a max width to prevent them from getting too large */
     }
 }
 
@@ -303,35 +264,30 @@ footer {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
-    align-items: center; /* Center icons vertically */
+    align-items: center;
     gap: 2rem;
 }
 
 .social-links a {
-    display: flex; /* Ensures the icon aligns within the link */
-    align-items: center; /* Center icon vertically inside link */
+    display: flex;
+    align-items: center;
     width: 30px;
     height: 30px;
     transition: transform 0.3s ease;
 }
 
 .social-links img {
-    width: 30px; /* Set fixed width */
-    height: 30px; /* Set fixed height */
-    height: auto;
-    display: block; /* Prevents extra space below images */
-    object-fit: contain; /* Ensures the image fits well within its container */
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
 }
 
 .social-links a:hover {
-    transform: scale(2.1); /* Adds a zoom effect on hover */
+    transform: scale(2.1);
 }
-
-
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* Navbar changes for mobile */
     .nav-links {
         display: none;
         flex-direction: column;
@@ -350,12 +306,10 @@ footer {
         display: block;
     }
 
-    /* Stack service cards on mobile */
     .service-cards {
         flex-direction: column;
     }
 
-    /* Hero section text adjustments */
     .hero-content h1 {
         font-size: 2rem;
     }
