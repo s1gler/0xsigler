@@ -240,6 +240,7 @@ header {
     height: 250px; /* Set the height of the carousel */
     align-items: center; /* Center images vertically */
     padding: 1rem; /* Add some padding for better visual spacing */
+    position: relative; /* For precise control */
 }
 .carousel::-webkit-scrollbar {
     display: none; /* Hide scrollbar for a cleaner look */
@@ -256,9 +257,15 @@ header {
     cursor: grab;
 }
 
+/* Mobile-specific adjustments */
 @media (max-width: 768px) {
-    .carousel img {
-        width: 150px; /* Adjust as needed */
+    .scrolling-carousel {
+        height: 220px; /* Adjust carousel height for smaller screens */
+        padding: 0.5rem; /* Adjust padding for mobile spacing */
+    }
+
+    .carousel-container img {
+        max-height: 150px; /* Smaller images for mobile */
     }
 }
 

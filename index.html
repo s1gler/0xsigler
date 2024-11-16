@@ -139,27 +139,30 @@ const carousel = document.querySelector('.scrolling-carousel');
 let isDragging = false;
 let startX;
 let scrollLeft;
-let autoScrollInterval;
+let autoScrollID;
 
-// Function to handle auto-scroll
-function startAutoScroll() {
-    stopAutoScroll(); // Ensure no overlapping intervals
-    autoScrollInterval = setInterval(() => {
-        carousel.scrollLeft += 1; // Adjust scroll speed
-    }, 20);
+// Auto-scroll function using requestAnimationFrame
+function autoScroll() {
+    autoScrollID = requestAnimationFrame(() => {
+        carousel.scrollLeft += 1; // Adjust speed if needed
+        autoScroll(); // Keep auto-scrolling
+    });
 }
 
-// Function to stop auto-scroll
+// Stop auto-scroll
 function stopAutoScroll() {
-    if (autoScrollInterval) {
-        clearInterval(autoScrollInterval);
+    if (autoScrollID) {
+        cancelAnimationFrame(autoScrollID);
+        autoScrollID = null;
     }
 }
 
-// Restart auto-scroll after interaction ends
+// Restart auto-scroll after interaction
 function restartAutoScroll() {
     stopAutoScroll();
-    setTimeout(startAutoScroll, 2000); // Resume auto-scroll after 2 seconds
+    setTimeout(() => {
+        autoScroll(); // Resume after a short delay
+    }, 2000);
 }
 
 // Mouse events for desktop
@@ -167,14 +170,14 @@ carousel.addEventListener('mousedown', (e) => {
     isDragging = true;
     startX = e.pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
-    stopAutoScroll(); // Pause auto-scroll during interaction
+    stopAutoScroll(); // Pause auto-scroll on interaction
     carousel.style.cursor = 'grabbing';
 });
 
 carousel.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust sensitivity for dragging
+    const walk = (x - startX) * 2; // Adjust drag sensitivity
     carousel.scrollLeft = scrollLeft - walk;
 });
 
@@ -187,7 +190,7 @@ carousel.addEventListener('mouseup', () => {
 carousel.addEventListener('mouseleave', () => {
     if (isDragging) {
         isDragging = false;
-        restartAutoScroll(); // Restart auto-scroll when mouse leaves
+        restartAutoScroll(); // Restart auto-scroll after leaving
     }
     carousel.style.cursor = 'grab';
 });
@@ -209,7 +212,7 @@ carousel.addEventListener('touchmove', (e) => {
 
 carousel.addEventListener('touchend', () => {
     isDragging = false;
-    restartAutoScroll(); // Restart auto-scroll after touch ends
+    restartAutoScroll(); // Restart auto-scroll after touch interaction
 });
 
 carousel.addEventListener('touchcancel', () => {
@@ -217,12 +220,10 @@ carousel.addEventListener('touchcancel', () => {
     restartAutoScroll(); // Restart auto-scroll after touch cancel
 });
 
-// Start auto-scroll after DOM is fully loaded
+// Start auto-scroll after DOM loads
 document.addEventListener('DOMContentLoaded', () => {
-    startAutoScroll();
+    autoScroll(); // Begin auto-scroll on page load
 });
-
-
     </script>
 
 </body>
