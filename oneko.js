@@ -17,7 +17,10 @@
   let idleAnimation = null;
   let idleAnimationFrame = 0;
 
-  const nekoSpeed = 10;
+  const nekoSpeed = 6;
+  const idleFrameRate = 2; // Slows down idle animations (higher number = slower)
+  let idleFrameCounter = 0; // Counter for slowing down idle animations
+
   const spriteWidth = 48; // Sprite width
   const spriteHeight = 48; // Sprite height
   const spriteSets = {
@@ -104,6 +107,7 @@
   function resetIdleAnimation() {
     idleAnimation = null;
     idleAnimationFrame = 0;
+    idleFrameCounter = 0; // Reset idle frame counter
   }
 
   function idle(direction) {
@@ -114,13 +118,17 @@
       idleAnimationFrame = 0;
     }
 
-    setSprite(idleAnimation, idleAnimationFrame);
-    idleAnimationFrame += 1;
+    if (idleFrameCounter === 0) {
+      setSprite(idleAnimation, idleAnimationFrame);
+      idleAnimationFrame += 1;
 
-    // Transition to looping frames after the initial set
-    if (idleAnimationFrame >= spriteSets[idleAnimation].length) {
-      idleAnimationFrame = spriteSets[idleAnimation].length - 8; // Start looping last row
+      // Transition to looping frames after the initial set
+      if (idleAnimationFrame >= spriteSets[idleAnimation].length) {
+        idleAnimationFrame = spriteSets[idleAnimation].length - 8; // Start looping last row
+      }
     }
+
+    idleFrameCounter = (idleFrameCounter + 1) % idleFrameRate;
   }
 
   function frame() {
@@ -172,6 +180,7 @@
 
   init();
 })();
+
 
 
 
