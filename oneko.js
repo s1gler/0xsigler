@@ -34,18 +34,8 @@
       [4, 0], [5, 0], [6, 0], [7, 0],
       [0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7],
     ], // Idle north
-    idleE: [
-      [2, 0],
-      [4, 0], [5, 0], [6, 0], [7, 0],
-      [0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7],
-    ], // Idle east
-    idleAltE: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]], // Alternate Idle East (row 6)
-    idleW: [
-      [3, 0],
-      [4, 0], [5, 0], [6, 0], [7, 0],
-      [0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7],
-    ], // Idle west
-    idleAltW: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]], // Alternate Idle West (row 5)
+    idleE: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]], // Idle east
+    idleW: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]], // Idle west
     E: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]], // Walk east
     N: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2]], // Walk north
     S: [[0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3]], // Walk south
@@ -113,25 +103,19 @@
   function idle(direction) {
     idleTime += 1;
 
-    if (idleAnimation === null) {
-      // Randomly pick the main or alternate idle animation for east/west
-      if (direction === "idleE") {
-        idleAnimation = Math.random() < 0.5 ? "idleE" : "idleAltE";
-      } else if (direction === "idleW") {
-        idleAnimation = Math.random() < 0.5 ? "idleW" : "idleAltW";
-      } else {
-        idleAnimation = direction; // For idleN or idleS
-      }
-      idleAnimationFrame = 0;
+    if (idleAnimation !== direction) {
+      idleAnimation = direction; // Set the current idle animation
+      idleAnimationFrame = 0; // Reset frame count for the new animation
+      idleFrameCounter = 0; // Reset the frame counter
     }
 
     if (idleFrameCounter === 0) {
       setSprite(idleAnimation, idleAnimationFrame);
       idleAnimationFrame += 1;
 
-      // Transition to looping frames after the initial set
+      // Loop back to the start if we've reached the end of the animation
       if (idleAnimationFrame >= spriteSets[idleAnimation].length) {
-        idleAnimationFrame = spriteSets[idleAnimation].length - 8; // Start looping last row
+        idleAnimationFrame = 0;
       }
     }
 
@@ -146,9 +130,9 @@
 
     if (distance < nekoSpeed || distance < spriteWidth) {
       if (Math.abs(diffX) > Math.abs(diffY)) {
-        idle(diffX > 0 ? "idleW" : "idleE");
+        idle(diffX > 0 ? "idleW" : "idleE"); // Use idle east or west
       } else {
-        idle(diffY > 0 ? "idleN" : "idleS");
+        idle(diffY > 0 ? "idleN" : "idleS"); // Use idle north or south
       }
       return;
     }
@@ -187,6 +171,11 @@
 
   init();
 })();
+
+
+
+
+
 
 
 
