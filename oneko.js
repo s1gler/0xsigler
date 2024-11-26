@@ -109,13 +109,29 @@
       idleFrameCounter = 0; // Reset the frame counter
     }
 
-    if (idleFrameCounter === 0) {
-      setSprite(idleAnimation, idleAnimationFrame);
-      idleAnimationFrame += 1;
+    const spriteSet = spriteSets[idleAnimation];
 
-      // Loop back to the start if we've reached the end of the animation
-      if (idleAnimationFrame >= spriteSets[idleAnimation].length) {
-        idleAnimationFrame = 0;
+    if (direction === "idleE" || direction === "idleW") {
+      // Always loop through the entire sprite set for idleE and idleW
+      if (idleFrameCounter === 0) {
+        setSprite(idleAnimation, idleAnimationFrame);
+        idleAnimationFrame = (idleAnimationFrame + 1) % spriteSet.length; // Loop through all frames
+      }
+    } else {
+      // Existing logic for idleN and idleS
+      const loopStartIndex = 5; // Starting index of the looping part
+
+      if (idleFrameCounter === 0) {
+        setSprite(
+          idleAnimation,
+          idleAnimationFrame < spriteSet.length ? idleAnimationFrame : idleAnimationFrame - loopStartIndex
+        );
+        idleAnimationFrame += 1;
+
+        // Loop only the subset if beyond the first full cycle
+        if (idleAnimationFrame >= spriteSet.length) {
+          idleAnimationFrame = loopStartIndex;
+        }
       }
     }
 
@@ -171,17 +187,3 @@
 
   init();
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
