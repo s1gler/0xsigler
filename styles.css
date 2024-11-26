@@ -51,11 +51,15 @@ header {
     .nav-links {
         max-height: 0; /* Hidden by default on mobile */
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
         position: absolute;
         top: 100%;
         right: 0;
         background-color: #4cb2b2;
         width: 100%;
+        padding: 1rem 0;
     }
 
     .nav-links.active {
